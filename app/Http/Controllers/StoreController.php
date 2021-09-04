@@ -43,22 +43,32 @@ class StoreController extends Controller
     
     public function edit(Store $store , Craft $craft, Payment $payment)
     {
-        $abc=$store->crafts()->pluck('id');
-        $check=[0,0,0,0,0];
-        foreach($abc as $ab){
-            $ab-=1;
-            $check[$ab]=1;
+        $crafts=$craft->get();
+        $payments=$payment->get();
+        $selected_craft_ids=$store->crafts()->pluck('id');
+        $selected_payment_ids=$store->payments()->pluck('id');
+        
+        foreach($crafts as $craft){
+            $craft['is_selected']=false;
             
+            foreach($selected_craft_ids as $selected_craft_id){
+                if($craft->id==$selected_craft_id){
+                    $craft['is_selected']=true;
+                }
+            }
         }
         
-        $def=$store->payments()->pluck('id');
-        $count=[0,0,0,0];
-        foreach($def as $de){
-            $de-=1;
-            $count[$de]=1;
+        foreach($payments as $payment){
+            $payment['is_selected']=false;
+            
+            foreach($selected_payment_ids as $selected_payment_id){
+                if($payment->id==$selected_payment_id){
+                    $payment['is_selected']=true;
+                }
+            }
         }
-        
-        return view('edit')->with(['store' => $store , 'crafts' =>$craft->get(), 'payments' => $payment->get() , 'check' => $check , 'count' => $count]);
+    
+        return view('edit')->with(['store' => $store , 'crafts' =>$crafts, 'payments' => $payments]);
     }
     
     public function update(Request $request, Store $store , Craft $craft , Payment $payment)

@@ -61,9 +61,15 @@
                          <div class="col-sm-10">
                                 @foreach ($crafts as $craft)
                                     <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}" @if( $check[(int)($craft->id)-1] == 1 ) checked @endif>{{$craft->type}}
-                                        </label>
+                                        @if($craft->is_selected)
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}" checked>{{$craft->type}}
+                                            </label>
+                                        @else
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}">{{$craft->type}}
+                                            </label>
+                                        @endif
                                     </div>
                                 @endforeach
                          </div>
@@ -109,9 +115,15 @@
                             <div class="col-sm-10">
                                 @foreach ($payments as $payment)
                                     <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}" @if( $count[(int)($payment->id)-1] == 1 ) checked @endif >{{$payment->payment}}
-                                        </label>
+                                        @if($payment->is_selected)
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}" checked>{{$payment->payment}}
+                                            </label>
+                                        @else
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}">{{$payment->payment}}
+                                            </label>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

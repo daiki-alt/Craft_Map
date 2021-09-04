@@ -27,13 +27,15 @@
             @endif
 
             <h1>店舗一覧画面</h1>
+            
             [<a href='/stores/create'>新規店舗入力</a>]
+            
             <div class='stores'>
                 @foreach ($stores as $store)
-            <div class="store">
-                <a href="/stores/{{$store->id}}"><h2 classs="title">{{ $store->name}}</h2></a>
-                <p class="body">{{$store->body}}</p>
-            </div>
+                    <div class="store">
+                        <a href="/stores/{{$store->id}}"><h2 classs="title">{{ $store->name}}</h2></a>
+                        <p class="body">{{$store->body}}</p>
+                    </div>
                @endforeach
             </div>
                 
