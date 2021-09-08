@@ -76,6 +76,13 @@
             </script>
         </div>
         
+        <div class="review">
+            <h1>口コミ</h1>
+            [<a href='/stores/{{ $store->id }}/review_create'>投稿する</a>]
+            <div class="review_list">
+                <!--口コミを一覧表示-->
+            </div>
+        </div>
         
     </body>
 </html>

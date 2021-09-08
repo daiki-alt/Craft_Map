@@ -5,27 +5,30 @@ namespace App\Http\Controllers;
 use App\Store;
 use App\Craft;
 use App\Payment;
+use App\Review;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
     public function index(Store $store)
     {
-        return view('index')->with(['stores' => $store->getPaginateByLimit()]);
+        return view('store/index')->with(['stores' => $store->getPaginateByLimit()]);
     }
     
-    public function show(Store $store , Craft $craft , Payment $payment)
+    public function show(Store $store , Craft $craft , Payment $payment , Review $review)
     {
-        return view('show')->with([
+         
+        return view('store/show')->with([
             'store' => $store , 
             'crafts' => $store->crafts()->get() , 
-            'payments' => $store->payments()->get()
+            'payments' => $store->payments()->get(),
+            'review' => $review->get()
             ]);
     }
     
     public function create(Craft $craft, Payment $payment)
     {
-        return view('create')->with(['crafts' =>$craft->get() , 'payments' => $payment->get()]);
+        return view('store/create')->with(['crafts' =>$craft->get() , 'payments' => $payment->get()]);
     }
     
     public function store(Request $request, Store $store , Craft $craft , Payment $payment)
@@ -68,7 +71,7 @@ class StoreController extends Controller
             }
         }
     
-        return view('edit')->with(['store' => $store , 'crafts' =>$crafts, 'payments' => $payments]);
+        return view('store/edit')->with(['store' => $store , 'crafts' =>$crafts, 'payments' => $payments]);
     }
     
     public function update(Request $request, Store $store , Craft $craft , Payment $payment)

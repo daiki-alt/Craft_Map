@@ -11,4 +11,9 @@ class ReviewController extends Controller
     {
          return $review->get();
     }
+    
+    public function create(Review $review)
+    {
+        return view('review/create');
+    }
 }

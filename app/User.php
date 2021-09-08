@@ -9,6 +9,14 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    public function stores() {
+        return $this->hasMany('App\Store');
+    }
+ 
+    public function likes() {
+        return $this->hasMany('App\Like');
+    }
 
     /**
      * The attributes that are mass assignable.

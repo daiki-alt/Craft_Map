@@ -35,6 +35,14 @@ class Store extends Model
         return $this->hasMany(\App\Review::class, 'store_id', 'id');
     }
     
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+ 
+    public function likes() {
+        return $this->hasMany('App\Like');
+    }
+    
     public function getByLimit(int $limit_count = 10)
     {
         // updated_atで降順に並べたあと、limitで件数制限をかける

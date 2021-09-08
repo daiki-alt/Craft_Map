@@ -44,7 +44,6 @@
                     <label class="col-sm-2 control-label"><h3>新規店舗入力</h3></label>
                 </div>
                 
-                
                 <form action="/stores" method="POST">
                     @csrf
                     <div class="container">
