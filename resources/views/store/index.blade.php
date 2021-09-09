@@ -38,10 +38,6 @@
                     </div>
                @endforeach
             </div>
-                
-            <div class='paginate'>
-                {{ $stores->links() }}
-            </div>
              
    
             

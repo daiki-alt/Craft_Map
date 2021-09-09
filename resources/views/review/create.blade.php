@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">コメント</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" type="text" name="review[comment]" ></textarea>
+                            <textarea class="form-control" type="text" name="review[comment]"　placeholder="店員さんの対応が良かった！" ></textarea>
                         </div>
                     </div>
                         

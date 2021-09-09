@@ -13,7 +13,29 @@
             <div class="content__store">
                 <h1>{{ $store->name }}</h1>    
             </div>
-            <p class="edit">[<a href="/stores/{{ $store->id }}/edit">編集</a>]</p>
+            
+            <span>
+            <img src="{{asset('img/nicebutton.png')}}" width="30px">
+             
+            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+            @if(Auth::user()->stores()->where('store_id' , $store->id)->get()->count())
+            <!-- 「いいね」取消用ボタンを表示 -->
+            	<a href="{{ route('unlike', $store) }}" class="btn btn-success btn-sm">
+            		いいね
+            		<!-- 「いいね」の数を表示 -->
+            		{{$store->users()->get()->count()}}
+            	</a>
+            @else
+            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+            	<a href="{{ route('like', $store) }}" class="btn btn-secondary btn-sm">
+            		いいね
+            		<!-- 「いいね」の数を表示 -->
+            		{{$store->users()->get()->count()}}
+            	</a>
+            @endif
+            </span>
+            
+            <p class="edit">[<a href="/stores/edit/{{ $store->id }}">編集</a>]</p>
             <form action="/stores/{{ $store->id }}" id="form_delete" method="post" style="display:inline">
                 @csrf
                 @method('DELETE')
@@ -78,9 +100,15 @@
         
         <div class="review">
             <h1>口コミ</h1>
-            [<a href='/stores/{{ $store->id }}/review_create'>投稿する</a>]
-            <div class="review_list">
-                <!--口コミを一覧表示-->
+            [<a href='/reviews/create/{{ $store->id }}'>投稿する</a>]
+            <div class="reviews">
+                @foreach ($reviews as $review)
+                    <div class="review">
+                        <a href="/stores/{{$review->id}}"><h2 classs="title">{{ $review->stars}}</h2></a>
+                        <p class="body">{{$review->comment}}</p>
+                    </div>
+               @endforeach
+                
             </div>
         </div>
         

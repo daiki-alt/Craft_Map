@@ -12,23 +12,23 @@ class StoreController extends Controller
 {
     public function index(Store $store)
     {
-        return view('store/index')->with(['stores' => $store->getPaginateByLimit()]);
+        return view('store/index')->with(['stores' => $store->get()]);
     }
     
-    public function show(Store $store , Craft $craft , Payment $payment , Review $review)
+    public function show(Store $store , Craft $craft , Payment $payment , Review $review )
     {
          
         return view('store/show')->with([
             'store' => $store , 
             'crafts' => $store->crafts()->get() , 
             'payments' => $store->payments()->get(),
-            'review' => $review->get()
+            'reviews' => $review->get(),
             ]);
     }
     
     public function create(Craft $craft, Payment $payment)
     {
-        return view('store/create')->with(['crafts' =>$craft->get() , 'payments' => $payment->get()]);
+        return view('store/create')->with(['crafts' => $craft->get() , 'payments' => $payment->get()]);
     }
     
     public function store(Request $request, Store $store , Craft $craft , Payment $payment)

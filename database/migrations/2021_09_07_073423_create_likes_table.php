@@ -18,10 +18,12 @@ class CreateLikesTable extends Migration
             $table->unsignedBigInteger('store_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+            
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         
-        $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        
     }
 
     /**
