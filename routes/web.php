@@ -25,9 +25,11 @@ Route::get('/stores/like/{store}', 'LikeController@like')->name('like');
 Route::get('/stores/unlike/{store}', 'LikeController@unlike')->name('unlike');
 
 //レビュー機能
-//Route::get('/stores/{store}' , 'ReviewController@index');
-Route::get('/reviews/create/{store}' , 'ReviewController@create');
-Route::post('/reviews' , 'ReviewController@store');
+Route::get('/reviews/create/{store_id}' , 'ReviewController@create');
+Route::get('/reviews/edit/{review}', 'ReviewController@edit');
+Route::put('/reviews/{review}', 'ReviewController@update');
+Route::delete('/reviews/{review}', 'ReviewController@destroy');
+Route::post('/reviews/store/{store}' , 'ReviewController@store');
 
 Route::get('/users' , 'UserController@index');
 

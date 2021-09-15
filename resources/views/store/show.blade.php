@@ -15,40 +15,48 @@
             </div>
             
             <span>
-            <img src="{{asset('img/nicebutton.png')}}" width="30px">
-             
-            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
-            @if(Auth::user()->stores()->where('store_id' , $store->id)->get()->count())
-            <!-- 「いいね」取消用ボタンを表示 -->
-            	<a href="{{ route('unlike', $store) }}" class="btn btn-success btn-sm">
-            		いいね
-            		<!-- 「いいね」の数を表示 -->
-            		{{$store->users()->get()->count()}}
-            	</a>
-            @else
-            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-            	<a href="{{ route('like', $store) }}" class="btn btn-secondary btn-sm">
-            		いいね
-            		<!-- 「いいね」の数を表示 -->
-            		{{$store->users()->get()->count()}}
-            	</a>
-            @endif
+                <img src="/images/nicebutton.png" width="30px">
+                
+                @if(Auth::user())
+                    <!--ユーザーが「いいね」をしていたら -->
+                    @if(Auth::user()->stores()->where('store_id' , $store->id)->get()->count())
+                    <!-- 「いいね」取消用ボタンを表示 -->
+                    	<a href="{{ route('unlike', $store) }}" class="btn btn-success btn-sm">
+                    		いいね
+                    		<!-- 「いいね」の数を表示 -->
+                    		{{ $store->users()->get()->count() }}
+                    	</a>
+                    @else
+                    <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                    	<a href="{{ route('like', $store) }}" class="btn btn-secondary btn-sm">
+                    		いいね
+                    		<!-- 「いいね」の数を表示 -->
+                    		{{ $store->users()->get()->count() }}
+                    	</a>
+                    @endif
+                @else
+                    <a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます');" class="btn btn-success btn-sm">
+                		いいね
+                		<!-- 「いいね」の数を表示 -->
+                		{{ $store->users()->get()->count() }}
+                	</a> 
+                @endif
             </span>
             
             <p class="edit">[<a href="/stores/edit/{{ $store->id }}">編集</a>]</p>
-            <form action="/stores/{{ $store->id }}" id="form_delete" method="post" style="display:inline">
+            
+            <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
                 @csrf
                 @method('DELETE')
                 <button type="submit" onclick="return deleteStore(this);">削除</button> 
             </form>
-            <p></p>
             
             <div class="content__store">
                 <h3　class="content_title">工芸の種類</h3>
                 @foreach ($crafts as $craft)
-                    <div class="content">{{$craft->type}}</div>
+                    <div class="content">{{ $craft->type }}</div>
                 @endforeach
-                <p></p>
+                <br>
             </div>
             
             <div class="content__store">
@@ -74,11 +82,48 @@
             <div class="content__store">
                 <h3　class="content_title">支払い方法</h3>
                 @foreach ($payments as $payment)
-                    <div class="content">{{$payment->payment}}</div>
+                    <div class="content">{{ $payment->payment }}</div>
                 @endforeach  
-                <p></p>
+                <br>
             </div>
+        </div>
+        
+        <div class="review-list">
+            <h1>口コミ</h1>
             
+            @if($self_review)
+                <a class="btn btn-success btn-sm" href="/reviews/edit/{{ $self_review->id }}">編集する</a>
+                
+                <form action="/reviews/{{ $self_review->id }}" id="form_delete2" method="post" style="display:inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return deleteReview(this);">削除</button> 
+                </form>
+            @elseif(Auth::id())
+                <a href='/reviews/create/{{ $store->id }}' class="btn btn-success btn-sm">投稿する</a>
+            @else
+                <a class="btn btn-success btn-sm" onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます');">投稿する</a>
+            @endif
+            
+            <div class="reviews">
+                <div class="review">
+                    @if($self_review)
+                        @for($star = 1; $star <= $self_review->stars; $star++)
+                            <span style="color:#ffcc00;">★</span>
+                        @endfor
+                        <p>{{ $self_review->comment }}</p>
+                    @endif
+                </div>
+                
+                <div class="review">
+                    @foreach ($nonself_reviews as $review)
+                        @for($star = 1; $star <= $review->stars; $star++)
+                            <span style="color:#ffcc00;">★</span>
+                        @endfor
+                        <p class="body">{{ $review->comment }}</p>
+                    @endforeach    
+                </div>
+            </div>
         </div>
         
         <div class="footer">
@@ -91,26 +136,20 @@
                     
                     if(confirm('削除すると復元できません。\n本当に削除しますか？'))
                     {
-                        document.getElementById('form_delete').submit();
+                        document.getElementById('form_delete1').submit();
                     }
-                 }
-            
+                }
+                
+                function deleteReview(e)
+                {
+                    'use strict';
+                    
+                    if(confirm('削除すると復元できません。\n本当に削除しますか？'))
+                    {
+                        document.getElementById('form_delete2').submit();
+                    }
+                }
             </script>
         </div>
-        
-        <div class="review">
-            <h1>口コミ</h1>
-            [<a href='/reviews/create/{{ $store->id }}'>投稿する</a>]
-            <div class="reviews">
-                @foreach ($reviews as $review)
-                    <div class="review">
-                        <a href="/stores/{{$review->id}}"><h2 classs="title">{{ $review->stars}}</h2></a>
-                        <p class="body">{{$review->comment}}</p>
-                    </div>
-               @endforeach
-                
-            </div>
-        </div>
-        
     </body>
 </html>

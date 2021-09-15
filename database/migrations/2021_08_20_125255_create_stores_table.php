@@ -21,7 +21,7 @@ class CreateStoresTable extends Migration
             $table->unsignedBigInteger('telephone_number');
             $table->time('start_hours');
             $table->time('end_hours');
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
             
         });

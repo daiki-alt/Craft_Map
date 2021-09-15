@@ -8,7 +8,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -25,22 +24,20 @@
                     @endauth
                 </div>
             @endif
-
-            <h1>店舗一覧画面</h1>
+            
+            <div class="title">
+                <h1>店舗一覧画面</h1>
+            </div>
             
             [<a href='/stores/create'>新規店舗入力</a>]
             
             <div class='stores'>
                 @foreach ($stores as $store)
                     <div class="store">
-                        <a href="/stores/{{$store->id}}"><h2 classs="title">{{ $store->name}}</h2></a>
-                        <p class="body">{{$store->body}}</p>
+                        <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
+                        <p class="body">{{ $store->body }}</p>
                     </div>
                @endforeach
-            </div>
-             
-   
-            
             </div>
         </div>
     </body>

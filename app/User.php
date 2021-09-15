@@ -12,11 +12,9 @@ class User extends Authenticatable
     
     public function stores()
     {
-        return $this->belongsToMany('App\Store' , 'likes');
+        return $this->belongsToMany('App\Store', 'likes');
     }
     
-    
- 
     /**
      * The attributes that are mass assignable.
      *

@@ -6,6 +6,7 @@ use App\Store;
 use App\Craft;
 use App\Payment;
 use App\Review;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -15,23 +16,26 @@ class StoreController extends Controller
         return view('store/index')->with(['stores' => $store->get()]);
     }
     
-    public function show(Store $store , Craft $craft , Payment $payment , Review $review )
+    public function show(Store $store, Craft $craft, Payment $payment, Review $review)
     {
-         
+        $self_review = $review->where('store_id', $store->id)->where('user_id', Auth::id())->first();
+        $nonself_reviews = $review->where('store_id', $store->id)->where('user_id', '!=', Auth::id())->get();
+
         return view('store/show')->with([
-            'store' => $store , 
-            'crafts' => $store->crafts()->get() , 
+            'store' => $store, 
+            'crafts' => $store->crafts()->get(), 
             'payments' => $store->payments()->get(),
-            'reviews' => $review->get(),
+            'self_review' => $self_review,
+            'nonself_reviews' => $nonself_reviews,
             ]);
     }
     
     public function create(Craft $craft, Payment $payment)
     {
-        return view('store/create')->with(['crafts' => $craft->get() , 'payments' => $payment->get()]);
+        return view('store/create')->with(['crafts' => $craft->get(), 'payments' => $payment->get()]);
     }
     
-    public function store(Request $request, Store $store , Craft $craft , Payment $payment)
+    public function store(Request $request, Store $store, Craft $craft, Payment $payment)
     {
         $store_input = $request['store'];
         $craft_input = $request['craft'];
@@ -44,37 +48,37 @@ class StoreController extends Controller
         return redirect('/stores/' . $store->id);
     }
     
-    public function edit(Store $store , Craft $craft, Payment $payment)
+    public function edit(Store $store, Craft $craft, Payment $payment)
     {
-        $crafts=$craft->get();
-        $payments=$payment->get();
-        $selected_craft_ids=$store->crafts()->pluck('id');
-        $selected_payment_ids=$store->payments()->pluck('id');
+        $crafts = $craft->get();
+        $payments = $payment->get();
+        $selected_craft_ids = $store->crafts()->pluck('id');
+        $selected_payment_ids = $store->payments()->pluck('id');
         
         foreach($crafts as $craft){
-            $craft['is_selected']=false;
+            $craft['is_selected'] = false;
             
             foreach($selected_craft_ids as $selected_craft_id){
-                if($craft->id==$selected_craft_id){
-                    $craft['is_selected']=true;
+                if($craft->id == $selected_craft_id){
+                    $craft['is_selected'] = true;
                 }
             }
         }
         
         foreach($payments as $payment){
-            $payment['is_selected']=false;
+            $payment['is_selected'] = false;
             
             foreach($selected_payment_ids as $selected_payment_id){
-                if($payment->id==$selected_payment_id){
-                    $payment['is_selected']=true;
+                if($payment->id == $selected_payment_id){
+                    $payment['is_selected'] = true;
                 }
             }
         }
     
-        return view('store/edit')->with(['store' => $store , 'crafts' =>$crafts, 'payments' => $payments]);
+        return view('store/edit')->with(['store' => $store, 'crafts' => $crafts, 'payments' => $payments]);
     }
     
-    public function update(Request $request, Store $store , Craft $craft , Payment $payment)
+    public function update(Request $request, Store $store, Craft $craft, Payment $payment)
     {
         $store_input = $request['store'];
         $craft_input = $request['craft'];

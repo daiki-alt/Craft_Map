@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!-- bootstrap読み込み -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <code class="code-multiline">
+        
         <!-- jQuery読み込み -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
  
@@ -19,9 +19,7 @@
          
         <!-- BootstrapのJavascript読み込み -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        </code>
-        
-    </head>
+    </head></script>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -43,102 +41,101 @@
                     <label class="col-sm-2 control-label"><h3>店舗編集</h3></label>
                 </div>
                 
-                
-                <form action="/stores/{{ $store->id}}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="container">
-                
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">店舗名</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="text" name="store[name]" value="{{ $store->name }}">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                        <label class="col-sm-2 control-label">工芸の種類</label>
-                         <div class="col-sm-10">
-                                @foreach ($crafts as $craft)
-                                    <div class="form-check form-check-inline">
-                                        @if($craft->is_selected)
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}" checked>{{$craft->type}}
-                                            </label>
-                                        @else
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}">{{$craft->type}}
-                                            </label>
-                                        @endif
-                                    </div>
-                                @endforeach
-                         </div>
-                   </div>
-
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">店舗形態</label>
-                    <div class="col-sm-10">
-                      <select class="form-control" name="store[work_type]" value="{{ $store->work_type }}">
-                        <option value="販売">販売</option>
-                        <option value="体験">体験</option>
-                        <option value="販売と体験">販売と体験</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">住所</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="text" name="store[address]" value="{{ $store->address }}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">電話番号</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="text" name="store[telephone_number]" value="{{ $store->telephone_number }}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">営業時間</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="time" name="store[start_hours]" value="{{ $store->start_hours }}">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label">営業時間</label>
-                    <div class="col-sm-10">
-                      <input class="form-control" type="time" name="store[end_hours]" value="{{ $store->end_hours }}">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                            <label class="col-sm-2 control-label">支払い方法</label>
+                <form action="/stores/{{ $store->id }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="container">
+                    
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">店舗名</label>
                             <div class="col-sm-10">
-                                @foreach ($payments as $payment)
-                                    <div class="form-check form-check-inline">
-                                        @if($payment->is_selected)
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}" checked>{{$payment->payment}}
-                                            </label>
-                                        @else
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}">{{$payment->payment}}
-                                            </label>
-                                        @endif
-                                    </div>
-                                @endforeach
+                                <input class="form-control" type="text" name="store[name]" value="{{ $store->name }}">
                             </div>
-                 </div>
-                  <div>
-                  <div>
-                  
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <input type="submit" value="更新"/>
+                        </div>
+                      
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">工芸の種類</label>
+                        <div class="col-sm-10">
+                            @foreach ($crafts as $craft)
+                                <div class="form-check form-check-inline">
+                                    @if($craft->is_selected)
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="craft[]" value="{{ $craft->id }}" checked>{{ $craft->type }}
+                                        </label>
+                                    @else                                        
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="craft[]" value="{{ $craft->id }}">{{ $craft->type }}
+                                        </label>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                  </div>
-         
-              </form>
-            
+    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">店舗形態</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="store[work_type]" value="{{ $store->work_type }}">
+                                <option value="販売">販売</option>
+                                <option value="体験">体験</option>
+                                <option value="販売と体験">販売と体験</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">住所</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="store[address]" value="{{ $store->address }}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">電話番号</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="store[telephone_number]" value="{{ $store->telephone_number }}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">営業時間</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="time" name="store[start_hours]" value="{{ $store->start_hours }}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">営業時間</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="time" name="store[end_hours]" value="{{ $store->end_hours }}">
+                        </div>
+                    </div>
+                      
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">支払い方法</label>
+                        <div class="col-sm-10">
+                            @foreach ($payments as $payment)
+                                <div class="form-check form-check-inline">
+                                    @if($payment->is_selected)
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="payment[]" value="{{ $payment->id }}" checked>{{ $payment->payment }}
+                                        </label>
+                                    @else
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="payment[]" value="{{ $payment->id }}">{{ $payment->payment }}
+                                        </label>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                      
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="更新"/>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="back">[<a href="/">back</a>]</div>

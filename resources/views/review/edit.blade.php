@@ -59,39 +59,39 @@
                 <label class="col-sm-2 control-label"><h3>レビュー投稿</h3></label>
             </div>
                 
-            <form action="/reviews/store/{{ $store_id }}" method="POST">
+            <form action="/reviews/{{ $review->store_id }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="container">
                     
                     <div class="evaluation">
-                        <input id="star1" type="radio" name="review[stars]" value="5" />
+                        <input id="star1" type="radio" name="review[stars]" value="{{ $review->stars }}" />
                         <label for="star1"><span class="text">大変良い</span>★</label>
-                        <input id="star2" type="radio" name="review[stars]" value="4" />
+                        <input id="star2" type="radio" name="review[stars]" value="{{ $review->stars }}" />
                         <label for="star2"><span class="text">良い</span>★</label>
-                        <input id="star3" type="radio" name="review[stars]" value="3" />
+                        <input id="star3" type="radio" name="review[stars]" value="{{ $review->stars }}" />
                         <label for="star3"><span class="text">普通</span>★</label>
-                        <input id="star4" type="radio" name="review[stars]" value="2" />
+                        <input id="star4" type="radio" name="review[stars]" value="{{ $review->stars }}" />
                         <label for="star4"><span class="text">悪い</span>★</label>
-                        <input id="star5" type="radio" name="review[stars]" value="1" />
+                        <input id="star5" type="radio" name="review[stars]" value="{{ $review->stars }}" />
                         <label for="star5"><span class="text">大変悪い</span>★</label>
                     </div>
-                                        
+                   
                     <div class="form-group">
                         <label class="col-sm-2 control-label">コメント</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" type="text" name="review[comment]"　placeholder="店員さんの対応が良かった！" ></textarea>
+                            <textarea class="form-control" type="text" name="review[comment]">{{ $review->comment }}</textarea>
                         </div>
                     </div>
                         
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <input type="submit" value="保存"/>
+                            <input type="submit" value="更新"/>
                         </div>
                     </div>
-                    
                 </div>
             </form>
             
-        <div class="back">[<a href="/stores/{{ $store_id }}">back</a>]</div>
+        <div class="back">[<a href="/stores/{{ $review->store_id }}">back</a>]</div>
     </body>
 </html>

@@ -20,9 +20,7 @@
          
         <!-- BootstrapのJavascript読み込み -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        
-        
-    </head>
+    </head></script>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -61,7 +59,7 @@
                                 @foreach ($crafts as $craft)
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="craft[]" value="{{$craft->id}}">{{$craft->type}}
+                                            <input class="form-check-input" type="checkbox" name="craft[]" value="{{ $craft->id }}">{{ $craft->type }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -113,7 +111,7 @@
                                 @foreach ($payments as $payment)
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="payment[]" value="{{$payment->id}}">{{$payment->payment}}
+                                            <input class="form-check-input" type="checkbox" name="payment[]" value="{{ $payment->id }}">{{ $payment->payment }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -125,9 +123,8 @@
                                 <input type="submit" value="保存"/>
                             </div>
                         </div>
-         
+                    </div>
                 </form>
-            
             </div>
         </div>
         <div class="back">[<a href="/">back</a>]</div>

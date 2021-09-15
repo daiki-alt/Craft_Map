@@ -17,7 +17,7 @@ class Store extends Model
         'telephone_number',
         'start_hours',
         'end_hours',
-        'payment',
+        'payment'
     ];
     
     public function crafts()
@@ -36,7 +36,7 @@ class Store extends Model
     }
     
     public function users() {
-        return $this->belongsToMany('App\User','likes');
+        return $this->belongsToMany('App\User', 'likes');
     }
  
     
