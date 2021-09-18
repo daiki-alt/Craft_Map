@@ -59,21 +59,21 @@
                 <label class="col-sm-2 control-label"><h3>レビュー投稿</h3></label>
             </div>
                 
-            <form action="/reviews/{{ $review->store_id }}" method="POST">
+            <form action="/reviews/{{ $review->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="container">
                     
                     <div class="evaluation">
-                        <input id="star1" type="radio" name="review[stars]" value="{{ $review->stars }}" />
+                        <input id="star1" type="radio" name="review[stars]" value="5" {{ $checked[5] }}/>
                         <label for="star1"><span class="text">大変良い</span>★</label>
-                        <input id="star2" type="radio" name="review[stars]" value="{{ $review->stars }}" />
+                        <input id="star2" type="radio" name="review[stars]" value="4" {{ $checked[4] }}/>
                         <label for="star2"><span class="text">良い</span>★</label>
-                        <input id="star3" type="radio" name="review[stars]" value="{{ $review->stars }}" />
+                        <input id="star3" type="radio" name="review[stars]" value="3" {{ $checked[3] }}/>
                         <label for="star3"><span class="text">普通</span>★</label>
-                        <input id="star4" type="radio" name="review[stars]" value="{{ $review->stars }}" />
+                        <input id="star4" type="radio" name="review[stars]" value="2" {{ $checked[2] }}/>
                         <label for="star4"><span class="text">悪い</span>★</label>
-                        <input id="star5" type="radio" name="review[stars]" value="{{ $review->stars }}" />
+                        <input id="star5" type="radio" name="review[stars]" value="1" {{ $checked[1] }}/>
                         <label for="star5"><span class="text">大変悪い</span>★</label>
                     </div>
                    
