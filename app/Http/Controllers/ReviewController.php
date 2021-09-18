@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Store;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -23,7 +24,7 @@ class ReviewController extends Controller
         $review_input = $request['review'];
         
         $review->store_id = $store_id;
-        $review->user_id = $request->user()->id;
+        $review->user_id = Auth::id();
         $review->fill($review_input)->save();
         
         return redirect('/stores/' . $store_id);
@@ -31,8 +32,10 @@ class ReviewController extends Controller
     
     public function edit(Review $review, Store $store)
     {
-        return view('review/edit')->with(['review' => $review, 'store' => $store]);
+        $checked=['', '', '', '', '', ''];
+        $checked[$review->stars]='checked';
         
+        return view('review/edit')->with(['review' => $review, 'store' => $store, 'checked' => $checked]);
     }
     
     public function update(Request $request, Review $review, Store $store)
