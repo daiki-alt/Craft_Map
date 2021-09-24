@@ -59,7 +59,7 @@
                 <label class="col-sm-2 control-label"><h3>レビュー投稿</h3></label>
             </div>
                 
-            <form action="/reviews/store/{{ $store_id }}" method="POST">
+            <form action="/reviews/store/{{ $store_id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="container">
                     
@@ -80,6 +80,13 @@
                         <label class="col-sm-2 control-label">コメント</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" type="text" name="review[comment]"　placeholder="店員さんの対応が良かった！" ></textarea>
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">画像</label>
+                        <div class="col-sm-10">
+                            {!! Form::file('photo[]', ['multiple' => 'multiple']) !!}
                         </div>
                     </div>
                         

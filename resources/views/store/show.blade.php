@@ -112,6 +112,12 @@
                             <span style="color:#ffcc00;">★</span>
                         @endfor
                         <p>{{ $self_review->comment }}</p>
+                        @foreach($self_review->images()->get() as $image)
+                            @if ($image['photo_path'])
+                              <!-- 画像を表示 -->
+                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                            @endif
+                        @endforeach
                     @endif
                 </div>
                 
@@ -121,6 +127,11 @@
                             <span style="color:#ffcc00;">★</span>
                         @endfor
                         <p class="body">{{ $review->comment }}</p>
+                        @foreach($review->images()->get() as $image)
+                            @if ($image['photo_path'])
+                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                            @endif
+                        @endforeach
                     @endforeach    
                 </div>
             </div>

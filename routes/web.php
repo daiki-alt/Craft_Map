@@ -31,6 +31,7 @@ Route::put('/reviews/{review}', 'ReviewController@update');
 Route::delete('/reviews/{review}', 'ReviewController@destroy');
 Route::post('/reviews/store/{store}' , 'ReviewController@store');
 
+
 Route::get('/users' , 'UserController@index');
 
 Auth::routes();

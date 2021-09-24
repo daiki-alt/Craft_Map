@@ -20,4 +20,9 @@ class Review extends Model
     {
         return $this->belongsTo(\App\User::class, 'user_id', 'id')->select('id', 'name');
     }
+    
+    public function images() 
+    { 
+        return $this->hasMany(\App\Image::class, 'review_id', 'id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Store;
 use App\Craft;
 use App\Payment;
 use App\Review;
+use App\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
