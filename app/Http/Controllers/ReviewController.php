@@ -88,10 +88,15 @@ class ReviewController extends Controller
     
     public function destroy(Review $review, Store $store, Image $image)
     {
-        $image=$review->images();
+        $images=$review->images()->get();
         
-        Storage::disk('s3')->delete($image);
-        $image->delete();
+        if($images){
+            foreach($images as $image){
+                Storage::disk('s3')->delete($image['photo_path']);
+                $image->delete();
+            }
+        }
+        
         $review->delete();
         
         
