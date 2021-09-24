@@ -42,7 +42,7 @@
                     <label class="col-sm-2 control-label"><h3>新規店舗入力</h3></label>
                 </div>
                 
-                <form action="/stores" method="POST">
+                <form action="/stores" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="container">
                 
@@ -115,6 +115,13 @@
                                         </label>
                                     </div>
                                 @endforeach
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">画像</label>
+                            <div class="col-sm-10">
+                                {!! Form::file('store_photo[]', ['multiple' => 'multiple']) !!}
                             </div>
                         </div>
                         

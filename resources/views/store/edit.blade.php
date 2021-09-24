@@ -41,7 +41,7 @@
                     <label class="col-sm-2 control-label"><h3>店舗編集</h3></label>
                 </div>
                 
-                <form action="/stores/{{ $store->id }}" method="POST">
+                <form action="/stores/{{ $store->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="container">
@@ -127,6 +127,29 @@
                                     @endif
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">選択された画像</label>
+                        <div class="col-sm-10">
+                            @if($images)
+                                @foreach ($images as $image)
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="store_images[]" value="{{ $image['photo_path'] }}" >
+                                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">新しく追加する画像</label>
+                        <div class="col-sm-10">
+                            {!! Form::file('store_photo[]', ['multiple' => 'multiple']) !!}
                         </div>
                     </div>
                       

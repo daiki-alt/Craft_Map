@@ -7,6 +7,8 @@ use App\Craft;
 use App\Payment;
 use App\Review;
 use App\Image;
+use App\StoreImage;
+use Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -46,6 +48,19 @@ class StoreController extends Controller
         $store->crafts()->attach($craft_input);
         $store->payments()->attach($payment_input);
         
+        $disk = Storage::disk('s3');
+        $store_images = $request->file('store_photo');
+        if($store_images){
+            foreach ($store_images as $image) {
+            $path = $disk->putFile('store_images', $image, 'public');
+            
+            StoreImage::create([
+                    'photo_path' => $path,
+                    'store_id' => $store->id,
+                ]);
+            }    
+        }
+        
         return redirect('/stores/' . $store->id);
     }
     
@@ -55,6 +70,8 @@ class StoreController extends Controller
         $payments = $payment->get();
         $selected_craft_ids = $store->crafts()->pluck('id');
         $selected_payment_ids = $store->payments()->pluck('id');
+        
+        $store_image=$store->store_images()->get();
         
         foreach($crafts as $craft){
             $craft['is_selected'] = false;
@@ -76,7 +93,7 @@ class StoreController extends Controller
             }
         }
     
-        return view('store/edit')->with(['store' => $store, 'crafts' => $crafts, 'payments' => $payments]);
+        return view('store/edit')->with(['store' => $store, 'crafts' => $crafts, 'payments' => $payments, 'images' => $store_image]);
     }
     
     public function update(Request $request, Store $store, Craft $craft, Payment $payment)
@@ -90,6 +107,27 @@ class StoreController extends Controller
         $store->payments()->detach();
         $store->crafts()->attach($craft_input);
         $store->payments()->attach($payment_input);
+        
+        if($request['store_images']){
+            $store_images=$request['store_images'];
+            foreach($store_images as $image){
+                Storage::disk('s3')->delete($image);
+                StoreImage::where('photo_path',$image)->delete();
+            }
+        }
+        
+        $disk = Storage::disk('s3');
+        $store_images_new = $request->file('store_photo');
+        if($store_images_new){
+            foreach ($store_images_new as $image) {
+            $path = $disk->putFile('store_images', $image, 'public');
+            
+            StoreImage::create([
+                    'photo_path' => $path,
+                    'store_id' => $store->id,
+                ]);
+            }    
+        }
     
         return redirect('/stores/' . $store->id);
     }
@@ -98,6 +136,15 @@ class StoreController extends Controller
     {
         $store->crafts()->detach();
         $store->payments()->detach();
+        
+        $store_image=$store->store_images()->get();
+        
+        if($store_image){
+            foreach($store_image as $image){
+                Storage::disk('s3')->delete($image['photo_path']);
+                $image->delete();
+            }
+        }
         
         $store->delete();
         return redirect('/');

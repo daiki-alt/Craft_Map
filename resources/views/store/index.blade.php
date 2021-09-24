@@ -35,7 +35,11 @@
                 @foreach ($stores as $store)
                     <div class="store">
                         <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
-                        <p class="body">{{ $store->body }}</p>
+                        @foreach($store->store_images()->get() as $image)
+                            @if ($image['photo_path'])
+                                <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                            @endif
+                        @endforeach
                     </div>
                @endforeach
             </div>

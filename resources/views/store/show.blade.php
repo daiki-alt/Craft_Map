@@ -14,6 +14,13 @@
                 <h1>{{ $store->name }}</h1>    
             </div>
             
+            @foreach($store->store_images()->get() as $image)
+                @if ($image['photo_path'])
+                    <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                @endif
+            @endforeach
+            <br>
+            
             <span>
                 <img src="/images/nicebutton.png" width="30px">
                 

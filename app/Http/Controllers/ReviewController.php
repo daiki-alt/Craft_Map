@@ -45,7 +45,7 @@ class ReviewController extends Controller
         return redirect('/stores/' . $store_id);
     }
     
-    public function edit(Review $review, Store $store, Image $image)
+    public function edit(Review $review, Store $store)
     {
         $checked=['', '', '', '', '', ''];
         $checked[$review->stars]='checked';
@@ -55,7 +55,7 @@ class ReviewController extends Controller
         return view('review/edit')->with(['review' => $review, 'store' => $store, 'checked' => $checked, 'images' => $image]);
     }
     
-    public function update(Request $request, Review $review, Store $store, Image $image)
+    public function update(Request $request, Review $review, Store $store)
     {
         $review_input = $request['review'];
         
@@ -86,7 +86,7 @@ class ReviewController extends Controller
         return redirect('/stores/' . $review->store_id);
     }
     
-    public function destroy(Review $review, Store $store, Image $image)
+    public function destroy(Review $review, Store $store)
     {
         $images=$review->images()->get();
         

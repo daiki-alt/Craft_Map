@@ -38,6 +38,11 @@ class Store extends Model
     public function users() {
         return $this->belongsToMany('App\User', 'likes');
     }
+    
+    public function store_images() 
+    { 
+        return $this->hasMany(\App\StoreImage::class, 'store_id', 'id');
+    }
  
     
 }
