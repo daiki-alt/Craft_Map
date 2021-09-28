@@ -1,0 +1,61 @@
+body{
+  background-image: url(/images/white_00032.jpg);
+  background-size: cover;
+}
+
+.logo{
+  text-align: center;
+  padding: 30px;
+}
+
+.logo:hover{
+	opacity:0.7;
+	cursor: pointer;
+}
+ 
+
+.logo:active{
+	position: relative;
+	top: 3px;
+}
+
+.content_store{
+    opacity: 0.7;
+    text-align: center;
+    padding: 30px;
+}
+
+.slider{
+    width: 500px;
+}
+
+.slider img{
+    width: 400px;
+    height: 500px;
+    /*float: right;*/
+}
+
+.review-list h1{
+    text-align: center;
+    padding: 50px;
+}
+
+.reviews{
+    display: flex;
+    flex-wrap: wrap;
+    gap:70px;
+    margin: 60px;
+}
+
+.review {
+    padding: 30px;
+    width: 550px;
+    height: 400px;
+    background-color: #fff;
+    border: double 5px #000;
+}
+
+.review img{
+    width: 30%;
+    height: 30%;
+}

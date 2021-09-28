@@ -11,8 +11,11 @@
 |
 */
 
+//トップページ
+Route::get('/', 'TopController@index');
+
 //店舗の新規作成・詳細画面
-Route::get('/', 'StoreController@index');
+Route::get('/stores/index', 'StoreController@index');
 Route::get('/stores/create', 'StoreController@create');
 Route::get('/stores/edit/{store}', 'StoreController@edit');
 Route::put('/stores/{store}', 'StoreController@update');

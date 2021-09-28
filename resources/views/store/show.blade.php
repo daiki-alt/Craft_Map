@@ -7,18 +7,40 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="../css/store_show.css" />
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+            
+            <!--スライド表示-->
+            <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('.slider').bxSlider({
+                            auto: true,
+                            pause: 5000,
+                        });
+                    });
+            </script>
     </head>
     <body>
+        
+        <div class="logo">
+            <a href="/"><img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" width="60px"></a>
+        </div>
+        
         <div class="content">
-            <div class="content__store">
-                <h1>{{ $store->name }}</h1>    
+            <div class="content_store">
+                <h1>～　{{ $store->name }}　～</h1>    
             </div>
             
-            @foreach($store->store_images()->get() as $image)
-                @if ($image['photo_path'])
-                    <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
-                @endif
-            @endforeach
+            <div class="slider">
+                @foreach($store->store_images()->get() as $image)
+                    @if ($image['photo_path'])
+                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
+                    @endif
+                @endforeach
+            </div>
             <br>
             
             <span>
@@ -96,7 +118,7 @@
         </div>
         
         <div class="review-list">
-            <h1>口コミ</h1>
+            <h1>～　口コミ　～</h1>
             
             @if($self_review)
                 <a class="btn btn-success btn-sm" href="/reviews/edit/{{ $self_review->id }}">編集する</a>
@@ -115,6 +137,7 @@
             <div class="reviews">
                 <div class="review">
                     @if($self_review)
+                        <p>{{ $user->name }}</p>
                         @for($star = 1; $star <= $self_review->stars; $star++)
                             <span style="color:#ffcc00;">★</span>
                         @endfor
@@ -122,24 +145,27 @@
                         @foreach($self_review->images()->get() as $image)
                             @if ($image['photo_path'])
                               <!-- 画像を表示 -->
-                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" width="300" height="300">
                             @endif
                         @endforeach
                     @endif
                 </div>
                 
                 <div class="review">
-                    @foreach ($nonself_reviews as $review)
-                        @for($star = 1; $star <= $review->stars; $star++)
-                            <span style="color:#ffcc00;">★</span>
-                        @endfor
-                        <p class="body">{{ $review->comment }}</p>
-                        @foreach($review->images()->get() as $image)
-                            @if ($image['photo_path'])
-                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
-                            @endif
-                        @endforeach
-                    @endforeach    
+                    @if($nonself_reviews)
+                        @foreach ($nonself_reviews as $review)
+                            <p>{{ $user->name }}</p>
+                            @for($star = 1; $star <= $review->stars; $star++)
+                                <span style="color:#ffcc00;">★</span>
+                            @endfor
+                            <p class="body">{{ $review->comment }}</p>
+                            @foreach($review->images()->get() as $image)
+                                @if ($image['photo_path'])
+                                  <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                                @endif
+                            @endforeach
+                        @endforeach 
+                    @endif
                 </div>
             </div>
         </div>

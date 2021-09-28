@@ -24,12 +24,15 @@ class StoreController extends Controller
         $self_review = $review->where('store_id', $store->id)->where('user_id', Auth::id())->first();
         $nonself_reviews = $review->where('store_id', $store->id)->where('user_id', '!=', Auth::id())->get();
 
+        $user=Auth::user();
+        
         return view('store/show')->with([
             'store' => $store, 
             'crafts' => $store->crafts()->get(), 
             'payments' => $store->payments()->get(),
             'self_review' => $self_review,
             'nonself_reviews' => $nonself_reviews,
+            'user' => $user
             ]);
     }
     

@@ -13,10 +13,6 @@ class ReviewController extends Controller
     
     public function create($store_id)
     {
-        //if($user->id === $review->id){
-            // return redirect('/stores/' . $store_id);
-        // }
-        
         return view('review/create')->with(['store_id' => $store_id]);
     }
     

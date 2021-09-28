@@ -1,0 +1,20 @@
+body{
+  background-image: url(/images/white_00032.jpg);
+  background-size: cover;
+}
+
+.logo{
+	text-align: center
+}
+
+.logo:hover{
+	opacity:0.7;
+	cursor: pointer;
+}
+ 
+
+.logo:active{
+	position: relative;
+	top: 3px;
+}
+

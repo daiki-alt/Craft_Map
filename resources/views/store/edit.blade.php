@@ -138,7 +138,7 @@
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="checkbox" name="store_images[]" value="{{ $image['photo_path'] }}" >
-                                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" width="400px" height="400px">
                                         </label>
                                     </div>
                                 @endforeach
