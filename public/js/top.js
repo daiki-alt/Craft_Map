@@ -88,13 +88,13 @@ function initAutocomplete() {
     const marker = new google.maps.Marker({
       position: {lat: d.lat, lng: d.lng},
       map: map,
-      title: data[name]
+      // title: data[name]
     });
     
     // マーカークリックしたら地名をポップアップさせる
-    marker.addListener('click', () => {
+    marker.addListener('click', (e) => {
       currentWindow && currentWindow.close();
-      const infoWindow = new google.maps.InfoWindow({content: d.name});
+      const infoWindow = new google.maps.InfoWindow({content: `<a href="/maps/${ d.name }"><h2 classs="title">${ d.name }</h2></a>`});
       infoWindow.open(map, marker);
       currentWindow = infoWindow;
     });

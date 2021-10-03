@@ -1,10 +1,14 @@
 body{
-  background-image: url(/images/white_00032.jpg);
-  background-size: cover;
+    background-image: url(/images/white_00032.jpg);
+    background-size: cover;
 }
 
 .logo{
-	text-align: center
+	text-align: center;
+}
+
+.logo img{
+	width: 60px;
 }
 
 .logo:hover{
@@ -18,3 +22,7 @@ body{
 	top: 3px;
 }
 
+.store img{
+	width: 300px;
+	height: 300px;
+}

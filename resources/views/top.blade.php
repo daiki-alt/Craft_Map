@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <link rel="stylesheet" type="text/css" href="../css/top.css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/top.css') }}"/>
         <script src="../js/top.js"></script>
         
     </head>
@@ -59,23 +59,23 @@
             <div class="craft-types">
                 <div class="craft-type">
                     <img src="/images/493851AF-99FD-4E93-91AB-93884FACAF99_1080x.webp">
-                    <h2>竹細工</h2>
+                    <a href="/stores/index"><h2>竹細工</h2></a>
                 </div>
                 <div class="craft-type">
                     <img src="/images/download.jpg">
-                    <h2>染物</h2>
+                    <a href="/stores/index"><h2>染物</h2></a>
                 </div>
                 <div class="craft-type">
                     <img src="/images/3faf9464-515b-4eaa-8e36-40344245fe3e.webp">
-                    <h2>陶芸</h2>
+                    <a href="/stores/index"><h2>陶芸</h2></a>
                 </div>
                 <div class="craft-type">
                     <img src="/images/image_050aedd3-2e1d-4cd0-b42c-cef88491a301_590x.webp">
-                    <h2>漆芸</h2>
+                    <a href="/stores/index"><h2>漆芸</h2></a>
                 </div>
                 <div class="craft-type">
                     <img src="/images/unnamed.jpg">
-                    <h2>木工</h2>
+                    <a href="/stores/index"><h2>木工</h2></a>
                 </div>
                 
             </div>

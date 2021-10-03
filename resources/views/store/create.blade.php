@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">画像</label>
                             <div class="col-sm-10">
-                                {!! Form::file('store_photo[]', ['multiple' => 'multiple']) !!}
+                                <input type="file" name="store_photo[]" multiple="multiple">
                             </div>
                         </div>
                         
@@ -134,6 +134,6 @@
                 </form>
             </div>
         </div>
-        <div class="back">[<a href="/">back</a>]</div>
+        <div class="back">[<a href="/stores/index">店舗一覧画面に戻る</a>]</div>
     </body>
 </html>

@@ -26,7 +26,8 @@ body{
 }
 
 .slider{
-    width: 500px;
+    width: 50%;
+    
 }
 
 .slider img{
@@ -53,6 +54,10 @@ body{
     height: 400px;
     background-color: #fff;
     border: double 5px #000;
+}
+
+.review span{
+    font-size: 30px;
 }
 
 .review img{

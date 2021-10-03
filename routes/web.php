@@ -24,16 +24,18 @@ Route::get('/stores/{store}', 'StoreController@show');
 Route::post('/stores' , 'StoreController@store');
 
 // いいねボタン
-Route::get('/stores/like/{store}', 'LikeController@like')->name('like');
-Route::get('/stores/unlike/{store}', 'LikeController@unlike')->name('unlike');
+Route::get('/stores/like/{store}', 'LikeController@like');
+Route::get('/stores/unlike/{store}', 'LikeController@unlike');
 
 //レビュー機能
 Route::get('/reviews/create/{store_id}' , 'ReviewController@create');
 Route::get('/reviews/edit/{review}', 'ReviewController@edit');
 Route::put('/reviews/{review}', 'ReviewController@update');
-Route::delete('/reviews/{review}', 'ReviewController@destroy');
+Route::delete('/reviews/{review}', 'ReviewController@delete');
 Route::post('/reviews/store/{store}' , 'ReviewController@store');
 
+//googlemap
+ Route::get('/maps/{name}', 'StoreController@mapshow');
 
 Route::get('/users' , 'UserController@index');
 

@@ -7,7 +7,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/store_show.css') }}" >
+        <link rel="stylesheet" type="text/css" href="../css/store_show.css" />
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -26,9 +26,7 @@
     <body>
         
         <div class="logo">
-            <a href="/">
-                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" width="60px">
-            </a>
+            <a href="/"><img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" width="60px"></a>
         </div>
         
         <div class="content">
@@ -39,10 +37,11 @@
             <div class="slider">
                 @foreach($store->store_images()->get() as $image)
                     @if ($image['photo_path'])
-                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
+                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
                     @endif
                 @endforeach
             </div>
+            <br>
             
             <span>
                 <img src="/images/nicebutton.png" width="30px">
@@ -51,14 +50,14 @@
                     <!--ユーザーが「いいね」をしていたら -->
                     @if(Auth::user()->stores()->where('store_id' , $store->id)->get()->count())
                     <!-- 「いいね」取消用ボタンを表示 -->
-                    	<a href="/stores/unlike/{{ $store->id }}" class="btn btn-success btn-sm">
+                    	<a href="{{ route('unlike', $store) }}" class="btn btn-success btn-sm">
                     		いいね
                     		<!-- 「いいね」の数を表示 -->
                     		{{ $store->users()->get()->count() }}
                     	</a>
                     @else
                     <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-                    	<a href="/stores/like/{{ $store->id }}" class="btn btn-secondary btn-sm">
+                    	<a href="{{ route('like', $store) }}" class="btn btn-secondary btn-sm">
                     		いいね
                     		<!-- 「いいね」の数を表示 -->
                     		{{ $store->users()->get()->count() }}
@@ -84,9 +83,7 @@
             <div class="content__store">
                 <h3　class="content_title">工芸の種類</h3>
                 @foreach ($crafts as $craft)
-                    <div class="content">
-                        {{ $craft->type }}
-                    </div>
+                    <div class="content">{{ $craft->type }}</div>
                 @endforeach
                 <br>
             </div>
@@ -114,10 +111,9 @@
             <div class="content__store">
                 <h3　class="content_title">支払い方法</h3>
                 @foreach ($payments as $payment)
-                    <div class="content">
-                        {{ $payment->payment }}
-                    </div>
+                    <div class="content">{{ $payment->payment }}</div>
                 @endforeach  
+                <br>
             </div>
         </div>
         
@@ -130,7 +126,7 @@
                 <form action="/reviews/{{ $self_review->id }}" id="form_delete2" method="post" style="display:inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" onclick="return deleteStore(this);">削除</button> 
+                    <button type="submit" onclick="return deleteReview(this);">削除</button> 
                 </form>
             @elseif(Auth::id())
                 <a href='/reviews/create/{{ $store->id }}' class="btn btn-success btn-sm">投稿する</a>
@@ -148,7 +144,8 @@
                         <p>{{ $self_review->comment }}</p>
                         @foreach($self_review->images()->get() as $image)
                             @if ($image['photo_path'])
-                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
+                              <!-- 画像を表示 -->
+                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" width="300" height="300">
                             @endif
                         @endforeach
                     @endif
@@ -157,7 +154,7 @@
                 <div class="review">
                     @if($nonself_reviews)
                         @foreach ($nonself_reviews as $review)
-                            <p>{{ $review->users->name }}</p>
+                            <p>{{ $user->name }}</p>
                             @for($star = 1; $star <= $review->stars; $star++)
                                 <span style="color:#ffcc00;">★</span>
                             @endfor
@@ -174,7 +171,7 @@
         </div>
         
         <div class="footer">
-            <a href="/stores/index">店舗一覧画面に戻る</a>
+            <a href="/">戻る</a>
         
             <script>
                 function deleteStore(e)
@@ -185,11 +182,17 @@
                     {
                         document.getElementById('form_delete1').submit();
                     }
-                    else if(confirm('削除すると復元できません。\n本当に削除しますか？')){
+                }
+                
+                function deleteReview(e)
+                {
+                    'use strict';
+                    
+                    if(confirm('削除すると復元できません。\n本当に削除しますか？'))
+                    {
                         document.getElementById('form_delete2').submit();
                     }
                 }
-                
             </script>
         </div>
     </body>
