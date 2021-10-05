@@ -5,6 +5,8 @@ body{
 
 .logo{
 	text-align: center;
+	margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 .logo img{
@@ -20,6 +22,32 @@ body{
 .logo:active{
 	position: relative;
 	top: 3px;
+}
+
+ul{
+    display: flex;
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+    background-color: white;
+}
+ul li{
+    flex: auto;
+    list-style: none;
+    min-width: 50px;
+}
+ul li a{
+    margin: auto;
+    display: block;
+    width: 80%;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+
+ul li:hover{
+    background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
 }
 
 .store img{

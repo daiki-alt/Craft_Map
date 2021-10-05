@@ -24,8 +24,8 @@
     </head>
     <body>
         <div class="content">
-            <div class="title m-b-md">
-                <label class="col-sm-2 control-label"><h3>レビュー投稿</h3></label>
+            <div class="title">
+                <h3>レビュー投稿</h3>
             </div>
                 
             <form action="/reviews/store/{{ $store_id }}" method="POST" enctype="multipart/form-data">
@@ -75,6 +75,14 @@
                 </div>
             </form>
             
-        <div class="back">[<a href="/stores/{{ $store_id }}">back</a>]</div>
+        <div class="back">
+            <a href="/stores/{{ $store_id }}">店舗ページへ戻る</a>
+        </div>
+        
+        <div class="logo">
+            <a href="/">
+                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
+            </a>
+        </div>
     </body>
 </html>

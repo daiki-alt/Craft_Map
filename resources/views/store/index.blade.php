@@ -11,45 +11,48 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/store_index.css') }}" />
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+        <div class="logo">
+            <a href="/">
+                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
+            </a>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                @if(Auth::id())
+                    <li><a href="{{ url('/home') }}">ログアウト</a></li>
+                @else
+                    <li><a href="{{ route('login') }}">ログイン</a></li>
+                    <li><a href="{{ route('register') }}">新規登録</a></li>
+                @endif
+                <li><a href="//takutaku-online.com">オンラインショップ</a></li>
+                <li><a href=”#”>お気に入り店舗</a></li>
+                <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
+            </ul>
+        </nav>
+            
+        <div class="title">
+            <h2>” {{ $crafts->type }} ” を扱っているお店</h2>
+        </div>
+            
+        <div class="mt-4 mb-4">
+            <p>{{ $stores->count() }}件が見つかりました。</p>
+        </div>
+            
+        [<a href='/stores/create'>新規店舗入力</a>]
+            
+        <div class='stores'>
+            @foreach ($stores as $store)
+                <div class="store">
+                    <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
+                    @foreach($store->store_images()->get() as $image)
+                        @if ($image['photo_path'])
+                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
                         @endif
-                    @endauth
+                    @endforeach
                 </div>
-            @endif
-            
-            <div class="logo">
-                <a href="/">
-                    <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
-                </a>
-            </div>
-            
-            <div class="title">
-                <h1>店舗一覧</h1>
-            </div>
-            
-            [<a href='/stores/create'>新規店舗入力</a>]
-            
-            <div class='stores'>
-                @foreach ($stores as $store)
-                    <div class="store">
-                        <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
-                        @foreach($store->store_images()->get() as $image)
-                            @if ($image['photo_path'])
-                                <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
-                            @endif
-                        @endforeach
-                    </div>
-               @endforeach
-            </div>
+           @endforeach
         </div>
     </body>
 </html>

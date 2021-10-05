@@ -15,11 +15,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Store', 'likes');
     }
     
-    public function reviews() 
-    { 
-        return $this->hasMany(\App\Review::class, 'id', 'user_id');
-    }
-    
     /**
      * The attributes that are mass assignable.
      *

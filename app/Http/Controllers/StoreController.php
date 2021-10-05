@@ -14,9 +14,19 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function index(Store $store)
+    public function index(Store $store, Craft $craft)
     {
-        return view('store/index')->with(['stores' => $store->get()]);
+        $store = Store::all();
+        // $craft = Craft::all();
+        
+        return view('store/index')->with(['stores' => $store, 'crafts' => $craft]);
+    }
+    
+    public function indexByCraft(Craft $craft)
+    {
+        $stores = $craft->stores()->get();
+        
+        return view('store/index')->with(['stores' => $stores, 'crafts' => $craft]);
     }
     
     public function show(Store $store, Craft $craft, Payment $payment, Review $review)

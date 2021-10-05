@@ -16,6 +16,7 @@ class CreateCraftsTable extends Migration
         Schema::create('crafts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type' , 50);
+            $table->string('image_file', 100);
             $table->timestamps();
         });
     }

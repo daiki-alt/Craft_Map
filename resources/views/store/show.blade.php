@@ -27,9 +27,24 @@
         
         <div class="logo">
             <a href="/">
-                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" width="60px">
+                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
             </a>
         </div>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                @if(Auth::id())
+                    <li><a href="{{ url('/home') }}">ログアウト</a></li>
+                @else
+                    <li><a href="{{ route('login') }}">ログイン</a></li>
+                    <li><a href="{{ route('register') }}">新規登録</a></li>
+                @endif
+                <li><a href="//takutaku-online.com">オンラインショップ</a></li>
+                <li><a href=”#”>お気に入り店舗</a></li>
+                <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
+            </ul>
+        </nav>
         
         <div class="content">
             <div class="content_store">
@@ -78,7 +93,7 @@
             <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return deleteStore(this);">削除</button> 
+                <button type="submit" onclick="return deleteStore('form_delete1');">削除</button> 
             </form>
             
             <div class="content__store">
@@ -130,17 +145,17 @@
                 <form action="/reviews/{{ $self_review->id }}" id="form_delete2" method="post" style="display:inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" onclick="return deleteStore(this);">削除</button> 
+                    <button type="submit" onclick="return deleteStore('form_delete2');">削除</button> 
                 </form>
             @elseif(Auth::id())
-                <a href='/reviews/create/{{ $store->id }}' class="btn btn-success btn-sm">投稿する</a>
+                <a href='/reviews/create/{{ $store->id }}'>投稿する</a>
             @else
-                <a class="btn btn-success btn-sm" onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます');">投稿する</a>
+                <a onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます');">投稿する</a>
             @endif
             
             <div class="reviews">
-                <div class="review">
-                    @if($self_review)
+                @if($self_review)
+                    <div class="review">
                         <p>{{ $user->name }}</p>
                         @for($star = 1; $star <= $self_review->stars; $star++)
                             <span style="color:#ffcc00;">★</span>
@@ -151,11 +166,11 @@
                               <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
                             @endif
                         @endforeach
-                    @endif
-                </div>
+                    </div>
+                @endif
                 
-                <div class="review">
-                    @if($nonself_reviews)
+                @if($nonself_reviews)
+                    <div class="review">
                         @foreach ($nonself_reviews as $review)
                             <p>{{ $review->users->name }}</p>
                             @for($star = 1; $star <= $review->stars; $star++)
@@ -168,25 +183,22 @@
                                 @endif
                             @endforeach
                         @endforeach 
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
         
-        <div class="footer">
+        <div class="back">
             <a href="/stores/index">店舗一覧画面に戻る</a>
         
             <script>
-                function deleteStore(e)
+                function deleteStore(form)
                 {
                     'use strict';
                     
                     if(confirm('削除すると復元できません。\n本当に削除しますか？'))
                     {
-                        document.getElementById('form_delete1').submit();
-                    }
-                    else if(confirm('削除すると復元できません。\n本当に削除しますか？')){
-                        document.getElementById('form_delete2').submit();
+                        document.getElementById(form).submit();
                     }
                 }
                 

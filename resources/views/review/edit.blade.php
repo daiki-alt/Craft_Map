@@ -26,8 +26,8 @@
     </head>
     <body>
         <div class="content">
-            <div class="title m-b-md">
-                <label class="col-sm-2 control-label"><h3>レビュー投稿</h3></label>
+            <div class="title">
+                <h3>レビュー投稿</h3>
             </div>
                 
             <form action="/reviews/{{ $review->id }}" method="POST" enctype="multipart/form-data">
@@ -61,7 +61,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <h4 class="col-sm-2 control-label">選択された画像</h4>
+                        <h4 >選択された画像</h4>
                         <div class="col-sm-10">
                             @if($images)
                                 @foreach ($images as $image)
@@ -91,6 +91,14 @@
                 </div>
             </form>
             
-        <div class="back">[<a href="/stores/{{ $review->store_id }}">back</a>]</div>
+        <div class="back">
+            <a href="/stores/{{ $review->store_id }}">店舗ページへ戻る</a>
+        </div>
+        
+        <div class="logo">
+            <a href="/">
+                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
+            </a>
+        </div>
     </body>
 </html>
