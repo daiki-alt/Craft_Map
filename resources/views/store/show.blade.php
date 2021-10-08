@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/store_show.css') }}" >
+        <script src="../js/store_show.js"></script>
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -41,7 +42,11 @@
                     <li><a href="{{ route('register') }}">新規登録</a></li>
                 @endif
                 <li><a href="//takutaku-online.com">オンラインショップ</a></li>
-                <li><a href=”#”>お気に入り店舗</a></li>
+                @if(Auth::user())
+                    <li><a href="/stores/user/like">お気に入り店舗</a></li>
+                @else
+                    <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
+                @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
             </ul>
         </nav>
@@ -80,7 +85,7 @@
                     	</a>
                     @endif
                 @else
-                    <a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます');" class="btn btn-success btn-sm">
+                    <a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')" class="btn btn-success btn-sm">
                 		いいね
                 		<!-- 「いいね」の数を表示 -->
                 		{{ $store->users()->get()->count() }}
@@ -136,6 +141,21 @@
             </div>
         </div>
         
+        <!--google map表示-->
+            <input
+                id="pac-input"
+                class="controls"
+                type="text"
+                placeholder="Search Box"
+            />
+            <div id="map"></div>
+            
+            <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}&callback=initAutocomplete&libraries=places&v=weekly"
+                async
+            ></script>
+        
         <div class="review-list">
             <h1>～　口コミ　～</h1>
             
@@ -150,7 +170,7 @@
             @elseif(Auth::id())
                 <a href='/reviews/create/{{ $store->id }}'>投稿する</a>
             @else
-                <a onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます');">投稿する</a>
+                <a onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます')">投稿する</a>
             @endif
             
             <div class="reviews">
@@ -161,29 +181,34 @@
                             <span style="color:#ffcc00;">★</span>
                         @endfor
                         <p>{{ $self_review->comment }}</p>
-                        @foreach($self_review->images()->get() as $image)
-                            @if ($image['photo_path'])
-                              <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
-                            @endif
-                        @endforeach
+                        <div class="image-wrapper">
+                            @foreach($self_review->images()->get() as $image)
+                                @if ($image['photo_path'])
+                                  <img class="review-image"  src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
+                                @endif
+                            @endforeach
+                        </div>
+                        
                     </div>
                 @endif
                 
                 @if($nonself_reviews)
-                    <div class="review">
-                        @foreach ($nonself_reviews as $review)
+                    @foreach ($nonself_reviews as $review)
+                        <div class="review">
                             <p>{{ $review->users->name }}</p>
                             @for($star = 1; $star <= $review->stars; $star++)
                                 <span style="color:#ffcc00;">★</span>
                             @endfor
                             <p class="body">{{ $review->comment }}</p>
-                            @foreach($review->images()->get() as $image)
-                                @if ($image['photo_path'])
-                                  <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
-                                @endif
-                            @endforeach
-                        @endforeach 
-                    </div>
+                            <div class="image-wrapper">
+                                @foreach($review->images()->get() as $image)
+                                    @if ($image['photo_path'])
+                                      <img class="review-image" src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach 
                 @endif
             </div>
         </div>

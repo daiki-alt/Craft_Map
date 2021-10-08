@@ -27,20 +27,28 @@
                     <li><a href="{{ route('register') }}">新規登録</a></li>
                 @endif
                 <li><a href="//takutaku-online.com">オンラインショップ</a></li>
-                <li><a href=”#”>お気に入り店舗</a></li>
+                @if(Auth::user())
+                    <li><a href="/stores/user/like">お気に入り店舗</a></li>
+                @else
+                    <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
+                @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
             </ul>
         </nav>
             
         <div class="title">
-            <h2>” {{ $crafts->type }} ” を扱っているお店</h2>
+            @if($crafts)
+                <h2>” {{ $crafts->type }} ” を扱っているお店</h2>
+            @else if($likes)
+                <h2>お気に入り店舗</h2>
+            @endif
         </div>
             
         <div class="mt-4 mb-4">
             <p>{{ $stores->count() }}件が見つかりました。</p>
         </div>
             
-        [<a href='/stores/create'>新規店舗入力</a>]
+        <a href='/stores/create'>新規店舗入力</a>
             
         <div class='stores'>
             @foreach ($stores as $store)

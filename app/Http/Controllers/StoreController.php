@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Store;
+use App\Like;
 use App\Craft;
 use App\Payment;
 use App\Review;
@@ -17,9 +18,17 @@ class StoreController extends Controller
     public function index(Store $store, Craft $craft)
     {
         $store = Store::all();
-        // $craft = Craft::all();
         
         return view('store/index')->with(['stores' => $store, 'crafts' => $craft]);
+    }
+    
+    public function indexByLike(Craft $craft)
+    {
+        $user = Auth::user();
+        $stores = $user->stores()->get();
+        $likes = $stores;
+        
+        return view('store/index')->with(['stores' => $stores, 'crafts' => $craft, 'likes' => $likes]);
     }
     
     public function indexByCraft(Craft $craft)
@@ -28,6 +37,7 @@ class StoreController extends Controller
         
         return view('store/index')->with(['stores' => $stores, 'crafts' => $craft]);
     }
+    
     
     public function show(Store $store, Craft $craft, Payment $payment, Review $review)
     {

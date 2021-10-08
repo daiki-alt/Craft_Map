@@ -22,14 +22,18 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                @if(Auth::id())
+                @if(Auth::user())
                     <li><a href="{{ url('/home') }}">ログアウト</a></li>
                 @else
                     <li><a href="{{ route('login') }}">ログイン</a></li>
                     <li><a href="{{ route('register') }}">新規登録</a></li>
                 @endif
                 <li><a href="//takutaku-online.com">オンラインショップ</a></li>
-                <li><a href=”#”>お気に入り店舗</a></li>
+                @if(Auth::user())
+                    <li><a href="/stores/user/like">お気に入り店舗</a></li>
+                @else
+                    <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
+                @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
             </ul>
         </nav>
@@ -39,17 +43,17 @@
         </div>
             
         <input
-          id="pac-input"
-          class="controls"
-          type="text"
-          placeholder="Search Box"
+            id="pac-input"
+            class="controls"
+            type="text"
+            placeholder="Search Box"
         />
         <div id="map"></div>
         
         <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
         <script
-          src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}&callback=initAutocomplete&libraries=places&v=weekly"
-          async
+            src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}&callback=initAutocomplete&libraries=places&v=weekly"
+            async
         ></script>
         
         <div class="content-title">
