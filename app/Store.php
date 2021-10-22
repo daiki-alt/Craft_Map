@@ -14,6 +14,8 @@ class Store extends Model
         'type',
         'work_type',
         'address',
+        'lat',
+        'lng',
         'telephone_number',
         'start_hours',
         'end_hours',

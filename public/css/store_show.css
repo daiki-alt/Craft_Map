@@ -50,37 +50,77 @@ ul li:hover{
     background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
 }
 
-.content_store{
-    opacity: 0.7;
-    text-align: center;
-    padding: 30px;
+.store_title{
+    padding: 50px;
 }
 
-.slider{
-    width: 50%;
+.store_name{
+    opacity: 0.7;
+    text-align: center;
+    padding: 70px;
+}
+
+.like{
+    float: right;
+    padding-right: 30px;
+}
+
+.like img{
+    width: 40px;
 }
 
 .slider img{
-    width: 400px;
     height: 500px;
 }
 
 .bx-wrapper{
-    width:50%;
+    width:45%;
+    float:right;
+    margin-right: 70px;
 }
 
-.review-list a{
-    width: 120px;
+.content_store{
+    padding-left: 50px;
+    padding-bottom: 20px;
 }
 
-.review-list a:hover {
+.content_store h4{
+    opacity: 0.8;
+}
+
+.content_store p{
+    padding-left: 30px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.content_store span{
+    font-size: 18px;
+    margin-left: 30px;
+    opacity: 0.8;
+}
+
+
+.map_title{
+    opacity: 0.7;
+    text-align: center;
+    padding: 120px;
+}
+
+.review-list h1{
+    opacity: 0.7;
+    text-align: center;
+    padding: 120px;
+}
+
+.edit a:hover {
     text-decoration: none;
     background-image: linear-gradient(#C0C0C0, #808080, #444444);
 }
 
-.review-list h1{
-    text-align: center;
-    padding: 50px;
+.edit{
+    display: flex;
+    padding-left: 30px;
 }
 
 .reviews{
@@ -112,7 +152,7 @@ ul li:hover{
     width: 30%;
 }
 
-.back a, .review-list a{
+.back a, .edit a{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,6 +163,7 @@ ul li:hover{
     background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
     border-radius: 50vh;
     transition: 0.3s;
+    margin-left: 30px;
 }
 
 .back a{

@@ -48,25 +48,20 @@
                     <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
                 @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
+                @if(Auth::id() === 1)
+                    <li><a href='/stores/index'>登録店舗一覧</a></li>
+                @endif
             </ul>
         </nav>
         
-        <div class="content">
-            <div class="content_store">
-                <h1>～　{{ $store->name }}　～</h1>    
+        <div class="store_title">
+            <div class="store_name">
+                <h1>～　{{ $store->name }}　～</h1>
             </div>
             
-            <div class="slider">
-                @foreach($store->store_images()->get() as $image)
-                    @if ($image['photo_path'])
-                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
-                    @endif
-                @endforeach
-            </div>
-            
-            <span>
-                <img src="/images/nicebutton.png" width="30px">
-                
+            <div class="like">
+                <img src="/images/nicebutton.png">
+                    
                 @if(Auth::user())
                     <!--ユーザーが「いいね」をしていたら -->
                     @if(Auth::user()->stores()->where('store_id' , $store->id)->get()->count())
@@ -91,54 +86,60 @@
                 		{{ $store->users()->get()->count() }}
                 	</a> 
                 @endif
-            </span>
+            </div>   
+        </div>
+        
+        <div class="content">
+            <div class="slider">
+                @foreach($store->store_images()->get() as $image)
+                    @if ($image['photo_path'])
+                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
+                    @endif
+                @endforeach
+            </div>
             
-            <p class="edit">[<a href="/stores/edit/{{ $store->id }}">編集</a>]</p>
-            
-            <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return deleteStore('form_delete1');">削除</button> 
-            </form>
-            
-            <div class="content__store">
-                <h3　class="content_title">工芸の種類</h3>
+            <div class="content_store">
+                <h4>【　工芸の種類　】</h4>
                 @foreach ($crafts as $craft)
-                    <div class="content">
+                    <span>
                         {{ $craft->type }}
-                    </div>
+                    </span>
                 @endforeach
                 <br>
             </div>
             
-            <div class="content__store">
-                <h3　class="content_title">営業形態</h3>
+            <div class="content_store">
+                <h4>【　営業形態　】</h4>
                 <p>{{ $store->work_type }}</p>    
             </div>
             
-            <div class="content__store">
-                <h3　class="content_title">住所</h3>
+            <div class="content_store">
+                <h4>【　住所　】</h4>
                 <p>{{ $store->address }}</p>    
             </div>
             
-            <div class="content__store">
-                <h3　class="content_title">電話番号</h3>
+            <div class="content_store">
+                <h4>【　電話番号　】</h4>
                 <p>{{ $store->telephone_number }}</p>    
             </div>
             
-            <div class="content__store">
-                <h3　class="content_title">営業時間</h3>
+            <div class="content_store">
+                <h4>【　営業時間　】</h4>
                 <p>{{ substr($store->start_hours,0,5) }}～{{ substr($store->end_hours,0,5) }}</p>     
             </div>
             
-            <div class="content__store">
-                <h3　class="content_title">支払い方法</h3>
+            <div class="content_store">
+                <h4>【　支払い方法　】</h4>
                 @foreach ($payments as $payment)
-                    <div class="content">
+                    <span class="content">
                         {{ $payment->payment }}
-                    </div>
+                    </span>
                 @endforeach  
             </div>
+        </div>
+        
+        <div class="map_title">
+            <h1>～　店舗マップ　～</h1>
         </div>
         
         <!--google map表示-->
@@ -159,19 +160,22 @@
         <div class="review-list">
             <h1>～　口コミ　～</h1>
             
-            @if($self_review)
-                <a class="btn btn-success btn-sm" href="/reviews/edit/{{ $self_review->id }}">編集する</a>
-                
-                <form action="/reviews/{{ $self_review->id }}" id="form_delete2" method="post" style="display:inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return deleteStore('form_delete2');">削除</button> 
-                </form>
-            @elseif(Auth::id())
-                <a href='/reviews/create/{{ $store->id }}'>投稿する</a>
-            @else
-                <a onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます')">投稿する</a>
-            @endif
+            <div class=edit>
+                @if($self_review)
+                    <a href="/reviews/edit/{{ $self_review->id }}">編集</a>
+                    
+                    <form action="/reviews/{{ $self_review->id }}" id="form_delete2" method="post" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <a type="submit" onclick="return deleteStore('form_delete2');">削除</a>
+                    </form>
+                @elseif(Auth::id())
+                    <a href='/reviews/create/{{ $store->id }}'>投稿する</a>
+                @else
+                    <a onClick="alert('＊ログイン後、レビュー投稿がご利用いただけます')">投稿する</a>
+                @endif
+            </div>
+            
             
             <div class="reviews">
                 @if($self_review)
@@ -215,19 +219,26 @@
         
         <div class="back">
             <a href="/stores/index">店舗一覧画面に戻る</a>
-        
-            <script>
-                function deleteStore(form)
-                {
-                    'use strict';
-                    
-                    if(confirm('削除すると復元できません。\n本当に削除しますか？'))
-                    {
-                        document.getElementById(form).submit();
-                    }
-                }
-                
-            </script>
         </div>
+        
+        <p class="edit">[<a href="/stores/edit/{{ $store->id }}">編集</a>]</p>
+            
+        <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="return deleteStore('form_delete1');">削除</button> 
+        </form>
+        
+        <script>
+            function deleteStore(form)
+            {
+                'use strict';
+                
+                if(confirm('削除すると復元できません。\n本当に削除しますか？'))
+                {
+                    document.getElementById(form).submit();
+                }
+            }           
+        </script>
     </body>
 </html>

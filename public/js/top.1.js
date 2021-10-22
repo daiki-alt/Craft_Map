@@ -73,29 +73,81 @@ function initAutocomplete() {
     map.fitBounds(bounds);
   });
   
-  //マーカーのデータ
-  const data = [
-    { name: "駿河の工房　匠宿", lat: 34.95361760276212, lng: 138.33336521292009 },
-    { name: "金剛石目塗鳥羽漆芸", lat: 34.96667419951148, lng: 138.39463709942694 },
-  ];
+  
+  var markerD = [];
+
+      // DB情報の取得(ajax)
+      $(function(){
+        $.ajax({
+          type: "GET",
+          url: "/maps",
+          dataType: "json",
+          success: function(data){
+            markerD = data;
+            console.log(markerD);
+            setMarker(markerD);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert('Error : ' + errorThrown);
+          }
+        });
+      });
   
   // 現在表示されているinfoWindowオブジェクト
-  let currentWindow;
   
-  data.map(d => {
-    // マーカーをつける
-    const marker = new google.maps.Marker({
-      position: {lat: d.lat, lng: d.lng},
-      map: map,
-    });
-    
-    // マーカークリックしたら地名をポップアップさせる
-    marker.addListener('click', (e) => {
-      currentWindow && currentWindow.close();
-      const infoWindow = new google.maps.InfoWindow({content: `<a href="/maps/${ d.name }"><h2 classs="title">${ d.name }</h2></a>`});
-      infoWindow.open(map, marker);
-      currentWindow = infoWindow;
-    });
-  });
+  
+  var marker = [];
+var infoWindow = [];
+  
+  function setMarker(markerData) {
 
-}
+        //マーカー生成
+        var icon;
+
+        for (var i = 0; i < markerData.length; i++) {
+
+          var latNum = parseFloat(markerData[i]['lat']);
+          var lngNum = parseFloat(markerData[i]['lng']);
+
+  // マーカー位置セット
+        var markerLatLng = new google.maps.LatLng({
+            lat: latNum,
+            lng: lngNum
+          });
+          
+  // マーカーのセット
+          marker[i] = new google.maps.Marker({
+            position: markerLatLng,          // マーカーを立てる位置を指定
+            map: map,                        // マーカーを立てる地図を指定
+            icon: icon                       // アイコン指定
+          });
+    
+    // 吹き出しの追加
+          infoWindow[i] = new google.maps.InfoWindow({
+            content: markerData[i]['name'] + '<br><br>' + markerData[i]['address'] 
+          });
+          
+          
+          markerEvent(i);
+        }
+        
+        var openWindow;
+
+      function markerEvent(i) {
+        marker[i].addListener('click', function() {
+          myclick(i);
+        });
+      }
+
+      function myclick(i) {
+        if(openWindow){
+          openWindow.close();
+        }
+        infoWindow[i].open(map, marker[i]);
+        openWindow = infoWindow[i];
+      }
+         
+    
+  };
+};
+

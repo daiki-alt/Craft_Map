@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         
         <!-- jQuery読み込み -->
+        <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
  
         <!-- Propper.js読み込み -->
@@ -86,7 +87,16 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">住所</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="text" name="store[address]" value="{{ $store->address }}">
+                            <input type="text" id="addressInput" name="store[address]" value="{{ $store->address }}">
+                        </div>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">緯度経度</label>
+                        <div class="col-sm-10">
+                            <button id="searchGeo" type="button">緯度経度変換</button>
+                            緯度：<input type="text" id="lat" name="store[lat]" value="{{ $store->lat }}">
+                            経度：<input type="text" id="lng" name="store[lng]" value="{{ $store->lng }}">
                         </div>
                     </div>
                     
@@ -162,5 +172,13 @@
             </div>
         </div>
         <div class="back">[<a href="/">back</a>]</div>
+        
+        <!--googleapiキー読み込み-->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}"
+            async
+        ></script>
+        <script src="../../js/store_create.js"></script>
+        
     </body>
 </html>

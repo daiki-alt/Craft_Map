@@ -28,14 +28,14 @@ class StoreController extends Controller
         $stores = $user->stores()->get();
         $likes = $stores;
         
-        return view('store/index')->with(['stores' => $stores, 'crafts' => $craft, 'likes' => $likes]);
+        return view('store/index_like')->with(['stores' => $stores, 'crafts' => $craft, 'likes' => $likes]);
     }
     
     public function indexByCraft(Craft $craft)
     {
         $stores = $craft->stores()->get();
         
-        return view('store/index')->with(['stores' => $stores, 'crafts' => $craft]);
+        return view('store/index_craft')->with(['stores' => $stores, 'crafts' => $craft]);
     }
     
     
@@ -173,22 +173,27 @@ class StoreController extends Controller
         return redirect('/');
     }
     
-    public function mapshow($name, Craft $craft, Payment $payment, Review $review)
-    {
-        $store=Store::where('name', $name)->first();
+    // public function mapshow($name, Craft $craft, Payment $payment, Review $review)
+    // {
+    //     $store=Store::where('name', $name)->first();
         
-        $self_review = $review->where('store_id', $store->id)->where('user_id', Auth::id())->first();
-        $nonself_reviews = $review->where('store_id', $store->id)->where('user_id', '!=', Auth::id())->get();
+    //     $self_review = $review->where('store_id', $store->id)->where('user_id', Auth::id())->first();
+    //     $nonself_reviews = $review->where('store_id', $store->id)->where('user_id', '!=', Auth::id())->get();
 
-        $user=Auth::user();
+    //     $user=Auth::user();
         
-        return view('store/show')->with([
-            'store' => $store, 
-            'crafts' => $store->crafts()->get(), 
-            'payments' => $store->payments()->get(),
-            'self_review' => $self_review,
-            'nonself_reviews' => $nonself_reviews,
-            'user' => $user
-            ]);
+    //     return view('store/show')->with([
+    //         'store' => $store, 
+    //         'crafts' => $store->crafts()->get(), 
+    //         'payments' => $store->payments()->get(),
+    //         'self_review' => $self_review,
+    //         'nonself_reviews' => $nonself_reviews,
+    //         'user' => $user
+    //         ]);
+    // }
+    
+     public function mapshow2(Store $store)
+    {
+        return $store->get();
     }
 }

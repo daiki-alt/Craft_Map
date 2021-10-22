@@ -18,6 +18,8 @@ class CreateStoresTable extends Migration
             $table->string('name', 100);
             $table->string('work_type', 50);
             $table->text('address');
+            $table->string('lat', 50);
+            $table->string('lng', 50);
             $table->unsignedBigInteger('telephone_number');
             $table->time('start_hours');
             $table->time('end_hours');

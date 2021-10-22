@@ -11,7 +11,9 @@
         
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/top.css') }}"/>
-        <script src="../js/top.js"></script>
+        <script src="../js/top.1.js"></script>
+        
+        <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
         
     </head>
     <body>
@@ -35,6 +37,9 @@
                     <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
                 @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
+                @if(Auth::id() === 1)
+                    <li><a href='/stores/index'>登録店舗一覧</a></li>
+                @endif
             </ul>
         </nav>
             
@@ -70,7 +75,7 @@
         </div>
         
         <div class="stores">
-            <h3>[<a href='/stores/index'>登録店舗一覧へ</a>]</h3>
+            <h3><a href='/stores/index'>登録店舗一覧へ</a></h3>
         </div>
             
         <!--<a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">匠宅からのお知らせ</a>-->
