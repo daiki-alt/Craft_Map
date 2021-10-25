@@ -10,6 +10,7 @@ use App\Review;
 use App\Image;
 use App\StoreImage;
 use Storage;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -58,11 +59,19 @@ class StoreController extends Controller
     
     public function create(Craft $craft, Payment $payment)
     {
+        if(! Gate::allows('admin')){
+            abort(403);
+        }
+        
         return view('store/create')->with(['crafts' => $craft->get(), 'payments' => $payment->get()]);
     }
     
     public function store(Request $request, Store $store, Craft $craft, Payment $payment)
     {
+        if(! Gate::allows('admin')){
+            abort(403);
+        }
+        
         $store_input = $request['store'];
         $craft_input = $request['craft'];
         $payment_input = $request['payment'];
@@ -89,6 +98,10 @@ class StoreController extends Controller
     
     public function edit(Store $store, Craft $craft, Payment $payment)
     {
+        if(! Gate::allows('admin')){
+            abort(403);
+        }
+        
         $crafts = $craft->get();
         $payments = $payment->get();
         $selected_craft_ids = $store->crafts()->pluck('id');
@@ -121,6 +134,10 @@ class StoreController extends Controller
     
     public function update(Request $request, Store $store, Craft $craft, Payment $payment)
     {
+        if(! Gate::allows('admin')){
+            abort(403);
+        }
+        
         $store_input = $request['store'];
         $craft_input = $request['craft'];
         $payment_input = $request['payment'];
@@ -157,6 +174,10 @@ class StoreController extends Controller
     
     public function delete(Store $store)
     {
+        if(! Gate::allows('admin')){
+            abort(403);
+        }
+        
         $store->crafts()->detach();
         $store->payments()->detach();
         

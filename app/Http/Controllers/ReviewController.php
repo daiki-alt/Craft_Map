@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Review;
 use App\Store;
 use App\Image;
 use Storage;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+
 
 class ReviewController extends Controller
 {
@@ -42,6 +46,10 @@ class ReviewController extends Controller
     
     public function edit(Review $review, Store $store)
     {
+        if(! Gate::allows('poster', $review)){
+            abort(403);
+        }
+        
         //星の数を選択したときに、選択された数だけcheckedにする
         $checked=['', '', '', '', '', ''];
         $checked[$review->stars]='checked';
@@ -54,6 +62,10 @@ class ReviewController extends Controller
     
     public function update(Request $request, Review $review, Store $store)
     {
+        if(! Gate::allows('poster', $review)){
+            abort(403);
+        }
+        
         $review_input = $request['review'];
         
         $review->fill($review_input)->save();
@@ -88,6 +100,10 @@ class ReviewController extends Controller
     
     public function delete(Review $review, Store $store)
     {
+        if(! Gate::allows('poster', $review)){
+            abort(403);
+        }
+        
         $images=$review->images()->get();
         
         if($images){
