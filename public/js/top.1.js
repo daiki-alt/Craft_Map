@@ -121,10 +121,11 @@ var infoWindow = [];
             map: map,                        // マーカーを立てる地図を指定
             icon: icon                       // アイコン指定
           });
-    
+          
     // 吹き出しの追加
           infoWindow[i] = new google.maps.InfoWindow({
-            content: markerData[i]['name'] + '<br><br>' + markerData[i]['address'] 
+              name : markerData[i]['name'],
+            content: "<a href='/maps/" + markerData[i]['name'] + "'>" + markerData[i]['name'] + '</a>' + '<br><br>' + markerData[i]['address'] 
           });
           
           

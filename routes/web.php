@@ -37,8 +37,9 @@ Route::delete('/reviews/{review}', 'ReviewController@delete');
 Route::post('/reviews/store/{store}' , 'ReviewController@store');
 
 //googlemap
-// Route::get('/maps/{name}', 'StoreController@mapshow');
+Route::get('/maps/{name}', 'StoreController@mapshow');
 Route::get('/maps', 'StoreController@mapshow2');
+Route::get('/maps/{store}', 'StoreController@mapshow2');
 
 Route::get('/users' , 'UserController@index');
 

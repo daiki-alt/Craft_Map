@@ -13,6 +13,32 @@ function initAutocomplete() {
   // Create the search box and link it to the UI element.
   const input = document.getElementById("pac-input");
   const searchBox = new google.maps.places.SearchBox(input);
+  var address = document.getElementById("address").textContent;
+  var name = document.getElementById("name").textContent;
+  var geocoder;
+  var marker;
+  var infoWindow;
+  
+  geocoder = new google.maps.Geocoder(); // ジオコードの準備
+    geocoder.geocode({ // ジオコードのリクエスト
+        'address': address // 調べる住所
+    }, function(results, status) { // ジオコードのリクエスト結果
+        if (status === google.maps.GeocoderStatus.OK) {
+            marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map
+            });
+        } else {
+            alert('Error: ' + status);
+        }
+        infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: name // 吹き出しに表示する内容
+  });
+ marker.addListener('click', function() { // マーカーをクリックしたとき
+     infoWindow.open(map, marker); // 吹き出しの表示
+    });
+    });
+  
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   // Bias the SearchBox results towards current map's viewport.
@@ -72,30 +98,4 @@ function initAutocomplete() {
     });
     map.fitBounds(bounds);
   });
-  
-  //マーカーのデータ
-  const data = [
-    { name: "駿河の工房　匠宿", lat: 34.95361760276212, lng: 138.33336521292009 },
-    { name: "金剛石目塗鳥羽漆芸", lat: 34.96667419951148, lng: 138.39463709942694 },
-  ];
-  
-  // 現在表示されているinfoWindowオブジェクト
-  let currentWindow;
-  
-  data.map(d => {
-    // マーカーをつける
-    const marker = new google.maps.Marker({
-      position: {lat: d.lat, lng: d.lng},
-      map: map,
-    });
-    
-    // マーカークリックしたら地名をポップアップさせる
-    marker.addListener('click', (e) => {
-      currentWindow && currentWindow.close();
-      const infoWindow = new google.maps.InfoWindow({content: `<a href="/maps/${ d.name }"><h2 classs="title">${ d.name }</h2></a>`});
-      infoWindow.open(map, marker);
-      currentWindow = infoWindow;
-    });
-  });
-
 }

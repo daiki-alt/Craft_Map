@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/store_show.css') }}" >
         <script src="../js/store_show.js"></script>
         
+        <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
@@ -48,15 +50,23 @@
                     <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
                 @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
-                @if(Auth::id() === 1)
-                    <li><a href='/stores/index'>登録店舗一覧</a></li>
-                @endif
+                <li><a href='/stores/index'>登録店舗一覧</a></li>
             </ul>
         </nav>
         
         <div class="store_title">
             <div class="store_name">
-                <h1>～　{{ $store->name }}　～</h1>
+                <h1 id="name">～　{{ $store->name }}　～</h1>
+                @if(Auth::id() === 1)
+                    <div class="store_edit">
+                        <a href="/stores/edit/{{ $store->id }}">編集</a>
+                        <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <a type="submit" onclick="return deleteStore('form_delete1');">削除</a> 
+                        </form>
+                    </div>
+                @endif
             </div>
             
             <div class="like">
@@ -115,7 +125,7 @@
             
             <div class="content_store">
                 <h4>【　住所　】</h4>
-                <p>{{ $store->address }}</p>    
+                <p id="address">{{ $store->address }}</p>    
             </div>
             
             <div class="content_store">
@@ -218,16 +228,8 @@
         </div>
         
         <div class="back">
-            <a href="/stores/index">店舗一覧画面に戻る</a>
+            <a href="/">トップページへ</a>
         </div>
-        
-        <p class="edit">[<a href="/stores/edit/{{ $store->id }}">編集</a>]</p>
-            
-        <form action="/stores/{{ $store->id }}" id="form_delete1" method="post" style="display:inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return deleteStore('form_delete1');">削除</button> 
-        </form>
         
         <script>
             function deleteStore(form)

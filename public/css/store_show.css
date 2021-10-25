@@ -60,6 +60,17 @@ ul li:hover{
     padding: 70px;
 }
 
+.store_edit{
+    display: flex;
+    padding-top: 30px;
+    padding-left: 420px;
+}
+
+.store_edit a:hover {
+    text-decoration: none;
+    background-image: linear-gradient(#C0C0C0, #808080, #444444);
+}
+
 .like{
     float: right;
     padding-right: 30px;
@@ -152,7 +163,7 @@ ul li:hover{
     width: 30%;
 }
 
-.back a, .edit a{
+.back a, .edit a, .store_edit a{
     display: flex;
     justify-content: space-between;
     align-items: center;

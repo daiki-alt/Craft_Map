@@ -33,9 +33,7 @@
                     <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
                 @endif
                 <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
-                @if(Auth::id() === 1)
-                    <li><a href='/stores/index'>登録店舗一覧</a></li>
-                @endif
+                <li><a href='/stores/index'>登録店舗一覧</a></li>
             </ul>
         </nav>
             
