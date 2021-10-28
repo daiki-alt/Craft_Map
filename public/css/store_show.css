@@ -1,6 +1,8 @@
+@import url("footer.css");
+
 body{
-  background-image: url(/images/white_00032.jpg);
-  background-size: cover;
+    background-image: url(/images/white_00032.jpg);
+    background-size: cover;
 }
 
 .logo{
@@ -17,26 +19,25 @@ body{
 	opacity:0.7;
 	cursor: pointer;
 }
- 
 
 .logo a:active{
 	position: relative;
 	top: 3px;
 }
 
-ul{
+.menu ul{
     display: flex;
     margin: 0 auto;
     width: 90%;
     text-align: center;
     background-color: white;
 }
-ul li{
+.menu ul li{
     flex: auto;
     list-style: none;
     min-width: 50px;
 }
-ul li a{
+.menu ul li a{
     margin: auto;
     display: block;
     width: 80%;
@@ -46,7 +47,7 @@ ul li a{
     font-weight: bold;
 }
 
-ul li:hover{
+.menu ul li:hover{
     background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
 }
 
@@ -110,7 +111,6 @@ ul li:hover{
     margin-left: 30px;
     opacity: 0.8;
 }
-
 
 .map_title{
     opacity: 0.7;
@@ -201,89 +201,89 @@ ul li:hover{
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-  width: 80%;
-  height: 800px;
-  margin: auto;
+    width: 80%;
+    height: 800px;
+    margin: auto;
 }
 
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #description {
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
 }
 
 #infowindow-content .title {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #infowindow-content {
-  display: none;
+    display: none;
 }
 
 #map #infowindow-content {
-  display: inline;
+    display: inline;
 }
 
 .pac-card {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  font-family: Roboto;
-  padding: 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    font-family: Roboto;
+    padding: 0;
 }
 
 #pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
+    padding-bottom: 12px;
+    margin-right: 12px;
 }
 
 .pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
+    display: inline-block;
+    padding: 5px 11px;
 }
 
 .pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
 }
 
 #pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 400px;
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
 }
 
 #pac-input:focus {
-  border-color: #4d90fe;
+    border-color: #4d90fe;
 }
 
 #title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
 }
 
 #target {
-  width: 345px;
+    width: 345px;
 }

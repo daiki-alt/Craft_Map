@@ -173,6 +173,8 @@
         </div>
         <div class="back">[<a href="/">back</a>]</div>
         
+        @extends('footer')
+        
         <!--googleapiキー読み込み-->
         <script
             src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}"

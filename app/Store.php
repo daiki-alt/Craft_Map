@@ -45,6 +45,4 @@ class Store extends Model
     { 
         return $this->hasMany(\App\StoreImage::class, 'store_id', 'id');
     }
- 
-    
 }

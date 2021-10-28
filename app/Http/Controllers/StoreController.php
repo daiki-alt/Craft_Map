@@ -149,7 +149,7 @@ class StoreController extends Controller
         $store->payments()->attach($payment_input);
         
         if($request['store_images']){
-            $store_images=$request['store_images'];
+            $store_images = $request['store_images'];
             foreach($store_images as $image){
                 Storage::disk('s3')->delete($image);
                 StoreImage::where('photo_path',$image)->delete();
@@ -181,7 +181,7 @@ class StoreController extends Controller
         $store->crafts()->detach();
         $store->payments()->detach();
         
-        $store_image=$store->store_images()->get();
+        $store_image = $store->store_images()->get();
         
         if($store_image){
             foreach($store_image as $image){

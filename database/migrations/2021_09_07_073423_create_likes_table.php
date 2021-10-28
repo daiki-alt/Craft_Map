@@ -19,11 +19,10 @@ class CreateLikesTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
             
+            //外部キー制約
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
-        
     }
 
     /**

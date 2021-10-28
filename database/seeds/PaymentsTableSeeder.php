@@ -30,6 +30,5 @@ class PaymentsTableSeeder extends Seeder
             'id'=>4,
             'payment'=>'PayPay',
         ]);
-        
     }
 }

@@ -1,12 +1,14 @@
+@import url("footer.css");
+
 body{
-  background-image: url(/images/white_00032.jpg);
-  background-size: cover;
+    background-image: url(/images/white_00032.jpg);
+    background-size: cover;
 }
 
 .logo{
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 60px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 .logo img{
@@ -18,7 +20,6 @@ body{
 	cursor: pointer;
 }
  
-
 .logo a:active{
 	position: relative;
 	top: 3px;
@@ -31,11 +32,13 @@ body{
     text-align: center;
     background-color: white;
 }
+
 .menu ul li{
     flex: auto;
     list-style: none;
     min-width: 50px;
 }
+
 .menu ul li a{
     margin: auto;
     display: block;
@@ -51,50 +54,84 @@ body{
 }
 
 .title{
-  margin: 100px;
-  text-align: center;
-  opacity: 0.7;
+    margin: 100px;
+    text-align: center;
+    opacity: 0.7;
 }
 
 .content-title{
-  text-align: center;
-  opacity: 0.7;
-  padding-top: 150px;
-  padding-bottom: 100px;
+    text-align: center;
+    opacity: 0.7;
+    padding-top: 150px;
+    padding-bottom: 100px;
 }
 
 .craft-types {
-  display: flex;
-  flex-wrap: wrap;
-  gap:70px;
-  margin: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:70px;
+    margin: 60px;
 }
 
 .craft-type {
-  padding: 30px;
-  width: 300px;
-  height: 350px;
-  background-color: #fff;
+    padding: 30px;
+    width: 300px;
+    height: 350px;
+    background-color: #fff;
 }
 
 .craft-type img{
-  width: 100%;
-  height: 80%;
+    width: 100%;
+    height: 80%;
 }
 
 .craft-type h2{
-  text-align: center;
+    text-align: center;
 }
 
-.lesson-icon{position:relative}
+.craft-type a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+    background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
+    border-radius: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+    width:240px;
+    height: 50px;
+}
 
-.lesson-icon p{position: absolute;
-               top: 75px;
-               width: 100%;
-               color: white;}
+.craft-type a::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #333333;
+    border-right: 3px solid #333333;
+    transform: rotate(45deg);
+}
+
+.craft-type a:hover {
+    text-decoration: none;
+    background-image: linear-gradient(#C0C0C0, #808080, #444444);
+}
+
+.lesson-icon{
+    position:relative
+}
+
+.lesson-icon p{
+    position: absolute;
+    top: 75px;
+    width: 100%;
+    color: white;
+}
 
 .stores{
-  text-align: center;
+    text-align: center;
 }
 
 /*Google map api*/
@@ -102,205 +139,90 @@ body{
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-  width: 80%;
-  height: 800px;
-  margin: auto;
+    width: 80%;
+    height: 800px;
+    margin: auto;
 }
 
 /* Optional: Makes the sample page fill the window. */
 html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #description {
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
 }
 
 #infowindow-content .title {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #infowindow-content {
-  display: none;
+    display: none;
 }
 
 #map #infowindow-content {
-  display: inline;
+    display: inline;
 }
 
 .pac-card {
-  background-color: #fff;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 0 0.5em;
-  font: 400 18px Roboto, Arial, sans-serif;
-  overflow: hidden;
-  font-family: Roboto;
-  padding: 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    font-family: Roboto;
+    padding: 0;
 }
 
 #pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
+    padding-bottom: 12px;
+    margin-right: 12px;
 }
 
 .pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
+    display: inline-block;
+    padding: 5px 11px;
 }
 
 .pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
 }
 
 #pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 400px;
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
 }
 
 #pac-input:focus {
-  border-color: #4d90fe;
+    border-color: #4d90fe;
 }
 
 #title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
 }
 
 #target {
-  width: 345px;
+    width: 345px;
 }
 
-#footer04 {
-  background: #222;
-  color: #ccc;
-  padding-left: 70px;
-  margin-top: 40px;
-}
- 
-#footer04 .cont {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 30px;
-}
- 
-#footer04 .cont-item {
-  display: block;
-  width: calc(100% / 4);
-}
- 
-#footer04 .nav a {
-  display: block;
-  color: #ccc;
-}
- 
-#footer04 .nav .ttl {
-  display: block;
-  margin: 30px 0 6px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #ccc;
-}
- 
-#footer04 .nav .ttl:first-child {
-  margin-top: 0;
-}
- 
-#footer04 .nav .ttl + .ttl {
-  margin-top: 10px;
-}
- 
-#footer04 .nav ul {
-  display: block;
-  font-size: 12px;
-  line-height: 2;
-}
- 
-#footer04 .nav li {
-  display: block;
-  font-size: 12px;
-  line-height: 2;
-}
- 
-#footer04 .nav li:first-child {
-  margin-top: 0;
-}
- 
-#footer04 .nav li ul {
-  margin: 0 0 0 2em;
-}
- 
-#footer04 .nav li li {
-  position: relative;
-}
- 
-#footer04 .nav li li:before {
-  position: absolute;
-  top: 50%;
-  left: -10px;
-  content: "";
-  display: block;
-  width: 4px;
-  height: 1px;
-  background-color: #fff;
-}
-
-#footer04 .tool{
-    padding-left: 100px;
-}
-
-#footer04 .tool a{
-    padding-bottom: 10px;
-}
- 
-#footer04 .logo img {
-  width: 90px;
-}
- 
-
-@media screen and (max-width: 640px) {
-  #footer04 .cont {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-  }
-  #footer04 .cont-item {
-    display: block;
-    width: 48%;
-  }
-  #footer04 .cont-item:nth-child(n+3) {
-    margin-top: 30px;
-  }
-  #footer04 .nav ul {
-    margin: 0;
-    font-size: 10px;
-  }
-  #footer04 .nav ul + .ttl {
-    margin-top: 10px;
-  }
-  #footer04 .nav li {
-    font-size: 10px;
-  }
-}

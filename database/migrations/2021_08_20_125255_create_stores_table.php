@@ -20,12 +20,11 @@ class CreateStoresTable extends Migration
             $table->text('address');
             $table->string('lat', 50);
             $table->string('lng', 50);
-            $table->unsignedBigInteger('telephone_number');
+            $table->string('telephone_number', 11);
             $table->time('start_hours');
             $table->time('end_hours');
             $table->softDeletes();
             $table->timestamps();
-            
         });
     }
 

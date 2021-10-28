@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->string('photo_path')->nullable();
             $table->timestamps();
             
+            //外部キー制約
             $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');;
         });
     }

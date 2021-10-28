@@ -28,11 +28,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('poster', function(User $user, Review $review) {
-        return $user->id==$review->user_id;
+        return $user->id == $review->user_id;
         });
         
         Gate::define('admin', function(User $user) {
-        return $user->id==1;
+        return $user->id == 1;
         });
     }
 }

@@ -19,6 +19,7 @@ class CreateStoreImagesTable extends Migration
             $table->string('photo_path')->nullable();
             $table->timestamps();
             
+            //外部キー制約
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');;
         });
         

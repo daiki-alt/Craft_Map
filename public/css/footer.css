@@ -1,0 +1,114 @@
+#footer04 {
+    background: #222;
+    color: #ccc;
+    padding-left: 70px;
+    margin-top: 40px;
+}
+ 
+#footer04 .cont {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 30px;
+}
+ 
+#footer04 .cont-item {
+    display: block;
+    width: calc(100% / 4);
+}
+ 
+#footer04 .nav a {
+    display: block;
+    color: #ccc;
+}
+ 
+#footer04 .nav .ttl {
+    display: block;
+    margin: 30px 0 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ccc;
+}
+ 
+#footer04 .nav .ttl:first-child {
+    margin-top: 0;
+}
+ 
+#footer04 .nav .ttl + .ttl {
+    margin-top: 10px;
+}
+ 
+#footer04 .nav ul {
+    display: block;
+    font-size: 12px;
+    line-height: 2;
+}
+ 
+#footer04 .nav li {
+    display: block;
+    font-size: 12px;
+    line-height: 2;
+}
+ 
+#footer04 .nav li:first-child {
+    margin-top: 0;
+}
+ 
+#footer04 .nav li ul {
+    margin: 0 0 0 2em;
+}
+ 
+#footer04 .nav li li {
+    position: relative;
+}
+ 
+#footer04 .nav li li:before {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    content: "";
+    display: block;
+    width: 4px;
+    height: 1px;
+    background-color: #fff;
+}
+
+#footer04 .tool{
+    padding-left: 100px;
+}
+
+#footer04 .tool a{
+    padding-bottom: 10px;
+}
+ 
+#footer04 .logo img {
+    width: 90px;
+}
+
+@media screen and (max-width: 640px) {
+  #footer04 .cont {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+  #footer04 .cont-item {
+    display: block;
+    width: 48%;
+  }
+  #footer04 .cont-item:nth-child(n+3) {
+    margin-top: 30px;
+  }
+  #footer04 .nav ul {
+    margin: 0;
+    font-size: 10px;
+  }
+  #footer04 .nav ul + .ttl {
+    margin-top: 10px;
+  }
+  #footer04 .nav li {
+    font-size: 10px;
+  }
+}

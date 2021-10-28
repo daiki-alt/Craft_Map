@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-
 use App\Review;
 use App\Store;
 use App\Image;
@@ -11,10 +9,8 @@ use Storage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
-
 class ReviewController extends Controller
 {
-    
     public function create($store_id)
     {
         return view('review/create')->with(['store_id' => $store_id]);
@@ -23,13 +19,13 @@ class ReviewController extends Controller
     public function store(Request $request, Review $review, $store_id)
     {
         $review_input = $request['review'];
+        $disk = Storage::disk('s3');
+        $images = $request->file('photo');
         
         $review->user_id = $request->user()->id;
 
         $review->fill($review_input)->save();
         
-        $disk = Storage::disk('s3');
-        $images = $request->file('photo');
         if($images){
             foreach ($images as $image){
                 $path = $disk->putFile('review_images', $image, 'public');
@@ -51,11 +47,10 @@ class ReviewController extends Controller
         }
         
         //星の数を選択したときに、選択された数だけcheckedにする
-        $checked=['', '', '', '', '', ''];
-        $checked[$review->stars]='checked';
+        $checked = ['', '', '', '', '', ''];
+        $checked[$review->stars] = 'checked';
         
-        $image=$review->images()->get();
-        
+        $image = $review->images()->get();
     
         return view('review/edit')->with(['review' => $review, 'store' => $store, 'checked' => $checked, 'images' => $image]);
     }
@@ -75,7 +70,7 @@ class ReviewController extends Controller
         
         if($request['images']){
             //$imagesにformから送られてきた写真を代入
-            $images=$request['images'];
+            $images = $request['images'];
             foreach($images as $image){
                 //foreachを使用して選択された画像を一枚ずつs3、データベースからそれぞれ削除
                 Storage::disk('s3')->delete($image);
@@ -104,7 +99,7 @@ class ReviewController extends Controller
             abort(403);
         }
         
-        $images=$review->images()->get();
+        $images = $review->images()->get();
         
         if($images){
             foreach($images as $image){

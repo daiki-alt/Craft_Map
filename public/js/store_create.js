@@ -53,7 +53,8 @@ function getLatLng() {
             } else if (status == google.maps.GeocoderStatus.UNKNOWN_ERROR) {
                 alert("原因不明のエラーが発生しました。");
             }
-        });
+        }
+    );
 }
 $('#searchGeo').on('click', getLatLng);
 

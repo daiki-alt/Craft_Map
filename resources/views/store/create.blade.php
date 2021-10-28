@@ -147,6 +147,8 @@
         </div>
         <div class="back">[<a href="/stores/index">店舗一覧画面に戻る</a>]</div>
         
+        @extends('footer')
+        
         <!--googleapiキー読み込み-->
         <script
             src="https://maps.googleapis.com/maps/api/js?key={{ config('services.googlemap.api_key') }}"

@@ -1,14 +1,16 @@
+@import url("footer.css");
+
 body{
-  background-image: url(/images/white_00032.jpg);
-  background-size: cover;
+    background-image: url(/images/white_00032.jpg);
+    background-size: cover;
 }
 
 .title h3 {
     font-size: 30px;
     width: 250px;
     margin-top: 20px;
-  position: relative;
-  padding: 1.5rem 1rem;
+    position: relative;
+    padding: 1.5rem 1rem;
 }
 
 .title h3:after {
@@ -111,7 +113,6 @@ body{
 	cursor: pointer;
 }
  
-
 .logo a:active{
 	position: relative;
 	top: 3px;

@@ -21,8 +21,6 @@
          
         {{-- BootstrapのJavascript読み込み --}}
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        
-        
     </head>
     <body>
         <div class="content">
@@ -95,10 +93,6 @@
             <a href="/stores/{{ $review->store_id }}">店舗ページへ戻る</a>
         </div>
         
-        <div class="logo">
-            <a href="/">
-                <img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp" >
-            </a>
-        </div>
+        @extends('footer')
     </body>
 </html>
