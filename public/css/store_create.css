@@ -1,0 +1,70 @@
+@import url("footer.css");
+
+body{
+    background-image: url(/images/white_00032.jpg);
+    background-size: cover;
+}
+
+.logo{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.logo img{
+    width: 60px;
+}
+
+.logo a:hover{
+	opacity:0.7;
+	cursor: pointer;
+}
+ 
+.logo a:active{
+	position: relative;
+	top: 3px;
+}
+
+.menu ul{
+    display: flex;
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+    background-color: white;
+}
+
+.menu ul li{
+    flex: auto;
+    list-style: none;
+    min-width: 50px;
+}
+
+.menu ul li a{
+    margin: auto;
+    display: block;
+    width: 80%;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+
+.menu ul li:hover{
+    background-image: linear-gradient(#808080, #C0C0C0, #FFFFFF);
+}
+
+.title{
+	opacity: 0.9;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#addressInput{
+    width: 100%;
+}
+
+.images img{
+    width:300px;
+    height:300px;
+}

@@ -13,18 +13,18 @@
         <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-            
-            <!--スライド表示-->
-            <script type="text/javascript">
-                    $(document).ready(function(){
-                        $('.slider').bxSlider({
-                            auto: true,
-                            pause: 5000,
-                        });
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+        
+        <!--スライド表示-->
+        <script type="text/javascript">
+                $(document).ready(function(){
+                    $('.slider').bxSlider({
+                        auto: true,
+                        pause: 5000,
                     });
-            </script>
+                });
+        </script>
     </head>
     <body>
         <div class="menu"> 

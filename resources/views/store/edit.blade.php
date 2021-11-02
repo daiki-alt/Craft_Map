@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
         <!-- bootstrap読み込み -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/store_create.css') }}" />
         
         <!-- jQuery読み込み -->
         <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
@@ -22,24 +23,39 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     </head></script>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
+        <div class="menu"> 
+            <div class="logo">
+                <a href="/"><img src="/images/b2e20892a1a73754f01bfb78d9848c03_d7ad8887-8e22-4d80-be75-fe236b677c4f_50x@2x.webp"></a>
+            </div>
+        
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    @if(Auth::user())
+                        <li><a href="{{ url('/home') }}">ログアウト</a></li>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
+                        <li><a href="{{ route('login') }}">ログイン</a></li>
+                        <li><a href="{{ route('register') }}">新規登録</a></li>
+                    @endif
+                    <li><a href="//takutaku-online.com">オンラインショップ</a></li>
+                    @if(Auth::user())
+                        <li><a href="/stores/user/like">お気に入り店舗</a></li>
+                    @else
+                        <li><a onClick="alert('＊ログイン後、お気に入り登録がご利用いただけます')">お気に入り店舗</a></li>
+                    @endif
+                    <li><a href="//takutaku-online.com/blogs/ニュース/匠宅からのお知らせ">お知らせ</a></li>
+                    <li><a href='/stores/index'>登録店舗一覧</a></li>
+                    @if(Auth::id() === 1)
+                        <li><a href='/stores/create'>新規店舗入力</a></li>
+                    @endif
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="flex-center position-ref full-height">
             <div class="content">
-                <div class="title m-b-md">
-                    <label class="col-sm-2 control-label"><h3>店舗編集</h3></label>
+                <div class="title">
+                    <h2>【 店舗編集 】</h2>
                 </div>
                 
                 <form action="/stores/{{ $store->id }}" method="POST" enctype="multipart/form-data">
@@ -141,14 +157,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">選択された画像</label>
+                        <label class="col-sm-2 control-lab">登録されている画像</label>
                         <div class="col-sm-10">
                             @if($images)
                                 @foreach ($images as $image)
                                     <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
+                                        <label class="images">
                                             <input class="form-check-input" type="checkbox" name="store_images[]" value="{{ $image['photo_path'] }}" >
-                                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" width="400px" height="400px">
+                                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}">
                                         </label>
                                     </div>
                                 @endforeach
@@ -171,7 +187,6 @@
                 </form>
             </div>
         </div>
-        <div class="back">[<a href="/">back</a>]</div>
         
         @extends('footer')
         

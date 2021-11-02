@@ -41,24 +41,20 @@
         </div>
             
         <div class="title">
-            ～　お気に入り店舗　～
+            <h1>【 お気に入り店舗 】</h1>
         </div>
             
-        <div class="mt-4 mb-4">
-            <p>{{ $stores->count() }}件が見つかりました。</p>
+        <div class="count">
+            <h4>{{ $stores->count() }}件が見つかりました。</h4>
         </div>
-            
-        <a href='/stores/create'>新規店舗入力</a>
             
         <div class='stores'>
             @foreach ($stores as $store)
                 <div class="store">
+                    @if($store->store_images()->first()->photo_path)
+                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $store->store_images()->first()->photo_path }}" >
+                    @endif
                     <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
-                    @foreach($store->store_images()->get() as $image)
-                        @if ($image['photo_path'])
-                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
-                        @endif
-                    @endforeach
                 </div>
            @endforeach
         </div>

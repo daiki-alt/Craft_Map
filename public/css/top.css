@@ -119,21 +119,6 @@ body{
     background-image: linear-gradient(#C0C0C0, #808080, #444444);
 }
 
-.lesson-icon{
-    position:relative
-}
-
-.lesson-icon p{
-    position: absolute;
-    top: 75px;
-    width: 100%;
-    color: white;
-}
-
-.stores{
-    text-align: center;
-}
-
 /*Google map api*/
 
 /* Always set the map height explicitly to define the size of the div

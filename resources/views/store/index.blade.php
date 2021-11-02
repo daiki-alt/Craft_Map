@@ -41,22 +41,20 @@
         </div>
             
         <div class="title">
-            登録店舗一覧
+            <h1>【 登録店舗一覧 】</h1>
         </div>
             
-        <div class="mt-4 mb-4">
-            <p>{{ $stores->count() }}店舗が登録されています。</p>
+        <div class="count">
+            <h4>{{ $stores->count() }}店舗が登録されています。</h4>
         </div>
-            
+        
         <div class='stores'>
             @foreach ($stores as $store)
                 <div class="store">
+                    @if($store->store_images()->first()->photo_path)
+                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $store->store_images()->first()->photo_path }}" >
+                    @endif
                     <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
-                    @foreach($store->store_images()->get() as $image)
-                        @if ($image['photo_path'])
-                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $image['photo_path'] }}" >
-                        @endif
-                    @endforeach
                 </div>
            @endforeach
         </div>

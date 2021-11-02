@@ -46,7 +46,7 @@
         </div>
             
         <div class="title">
-            <h1>～　静岡市工芸品マップ　～</h1>
+            <h1>【　静岡市工芸品マップ　】</h1>
         </div>
             
         <input
