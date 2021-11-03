@@ -68,7 +68,7 @@ body{
 .stores {
     display: flex;
     flex-wrap: wrap;
-    gap:70px;
+    gap:60px;
     margin: 60px;
 }
 
