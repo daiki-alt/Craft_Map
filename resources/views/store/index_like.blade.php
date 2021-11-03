@@ -51,10 +51,12 @@
         <div class='stores'>
             @foreach ($stores as $store)
                 <div class="store">
-                    @if($store->store_images()->first()->photo_path)
-                        <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $store->store_images()->first()->photo_path }}" >
+                    @if($store_image)
+                        @if($store->store_images()->first()->photo_path)
+                            <img src="https://map-image-backet.s3.ap-northeast-1.amazonaws.com/{{ $store->store_images()->first()->photo_path }}" >
+                        @endif
+                        <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
                     @endif
-                    <a href="/stores/{{ $store->id }}"><h2 classs="title">{{ $store->name }}</h2></a>
                 </div>
            @endforeach
         </div>
