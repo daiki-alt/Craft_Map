@@ -64,7 +64,7 @@
         ></script>
         
         <div class="content-title">
-            <h2>～　工芸の種類別一覧　～</h2>
+            <h2>【 工芸の種類別一覧 】</h2>
         </div>
             
         <div class="craft-types">

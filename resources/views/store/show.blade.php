@@ -170,7 +170,7 @@
             ></script>
         
         <div class="review-list">
-            <h1>～　口コミ　～</h1>
+            <h1>【　口コミ　】</h1>
             
             <div class=edit>
                 @if($self_review)
@@ -192,10 +192,14 @@
             <div class="reviews">
                 @if($self_review)
                     <div class="review">
-                        <p>{{ $user->name }}</p>
-                        @for($star = 1; $star <= $self_review->stars; $star++)
-                            <span style="color:#ffcc00;">★</span>
-                        @endfor
+                        <div class="user_name">
+                            <span>{{ $user->name }}</span>
+                        </div>
+                        <div class="star">
+                            @for($star = 1; $star <= $self_review->stars; $star++)
+                                <span style="color:#ffcc00;">★</span>
+                            @endfor
+                        </div>
                         <p>{{ $self_review->comment }}</p>
                         <div class="image-wrapper">
                             @foreach($self_review->images()->get() as $image)
@@ -211,10 +215,14 @@
                 @if($nonself_reviews)
                     @foreach ($nonself_reviews as $review)
                         <div class="review">
-                            <p>{{ $review->users->name }}</p>
-                            @for($star = 1; $star <= $review->stars; $star++)
-                                <span style="color:#ffcc00;">★</span>
-                            @endfor
+                            <div class="user_name">
+                                <span>{{ $review->users->name }}</span>
+                            </div>
+                            <div class="star">
+                                @for($star = 1; $star <= $review->stars; $star++)
+                                    <span style="color:#ffcc00;">★</span>
+                                @endfor
+                            </div>
                             <p class="body">{{ $review->comment }}</p>
                             <div class="image-wrapper">
                                 @foreach($review->images()->get() as $image)
