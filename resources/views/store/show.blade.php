@@ -135,10 +135,12 @@
                 <p>{{ $store->telephone_number }}</p>    
             </div>
             
-            <div class="content_store">
-                <h4>【　営業時間　】</h4>
-                <p>{{ substr($store->start_hours,0,5) }}～{{ substr($store->end_hours,0,5) }}</p>     
-            </div>
+            @if($store->start_hours)
+                <div class="content_store">
+                    <h4>【　営業時間　】</h4>
+                    <p>{{ substr($store->start_hours,0,5) }}～{{ substr($store->end_hours,0,5) }}</p>     
+                </div>
+            @endif
             
             <div class="content_store">
                 <h4>【　支払い方法　】</h4>

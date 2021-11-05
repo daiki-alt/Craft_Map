@@ -10,6 +10,7 @@
                         <li><a href="/stores/index/3">陶芸はこちら</a></li>
                         <li><a href="/stores/index/4">漆芸はこちら</a></li>
                         <li><a href="/stores/index/5">木工はこちら</a></li>
+                        <li><a href="/stores/index/6">その他はこちら</a></li>
                     </ul>
                 </div>
             </div>

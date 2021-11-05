@@ -36,6 +36,11 @@ class CraftsTableSeeder extends Seeder
             'type'=>'木工',
             'image_file' => '/images/unnamed.jpg'
         ]);
+        DB::table('crafts')->insert([
+            'id'=>6,
+            'type'=>'その他',
+            'image_file' => '/images/財布.jpg'
+        ]);
     }
     
     

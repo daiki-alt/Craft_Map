@@ -21,8 +21,8 @@ class CreateStoresTable extends Migration
             $table->string('lat', 50);
             $table->string('lng', 50);
             $table->string('telephone_number', 11);
-            $table->time('start_hours');
-            $table->time('end_hours');
+            $table->time('start_hours')->nullable();
+            $table->time('end_hours')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
