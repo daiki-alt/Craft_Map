@@ -17,10 +17,10 @@ class CreateStoresTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 100);
             $table->string('work_type', 50);
-            $table->text('address');
-            $table->string('lat', 50);
-            $table->string('lng', 50);
-            $table->string('telephone_number', 11);
+            $table->text('address')->nullable;
+            $table->string('lat', 50)->nullable;
+            $table->string('lng', 50)->nullable;
+            $table->string('telephone_number', 50)->nullable;
             $table->time('start_hours')->nullable();
             $table->time('end_hours')->nullable();
             $table->softDeletes();

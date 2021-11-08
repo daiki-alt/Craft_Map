@@ -17,8 +17,8 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('stars');
-            $table->text('comment');
+            $table->integer('stars')->nullable;
+            $table->text('comment')->nullable;
             $table->softDeletes();
             $table->timestamps();
             
