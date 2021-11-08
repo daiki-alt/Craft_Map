@@ -58,7 +58,7 @@
         
         <div class="store_title">
             <div class="store_name">
-                <h1 id="name">～　{{ $store->name }}　～</h1>
+                <h1 id="name">【　{{ $store->name }}　】</h1>
                 @if(Auth::id() === 1)
                     <div class="store_edit">
                         <a href="/stores/edit/{{ $store->id }}">編集</a>
@@ -125,15 +125,19 @@
                 <p>{{ $store->work_type }}</p>    
             </div>
             
-            <div class="content_store">
-                <h4>【　住所　】</h4>
-                <p id="address">{{ $store->address }}</p>    
-            </div>
+            @if($store->address)
+                <div class="content_store">
+                    <h4>【　住所　】</h4>
+                    <p id="address">{{ $store->address }}</p>    
+                </div>
+            @endif
             
-            <div class="content_store">
-                <h4>【　電話番号　】</h4>
-                <p>{{ $store->telephone_number }}</p>    
-            </div>
+            @if($store->telephone_number)
+                <div class="content_store">
+                    <h4>【　電話番号　】</h4>
+                    <p>{{ $store->telephone_number }}</p>    
+                </div>
+            @endif
             
             @if($store->start_hours)
                 <div class="content_store">
@@ -153,7 +157,7 @@
         </div>
         
         <div class="map_title">
-            <h1>～　店舗マップ　～</h1>
+            <h1>【　店舗マップ　】</h1>
         </div>
         
         <!--google map表示-->
